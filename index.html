@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Camille Hoy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --white:  #ffffff;
+  --bg:     #faf8f5;
+  --bg2:    #f3efe9;
+  --ink:    #1e1916;
+  --warm:   #4a4540;
+  --mid:    #8c8480;
+  --light:  #ddd8d0;
+  --rose:   #a08278;
+  --rose-l: #c9ada7;
+  --rose-x: #f0e6e3;
+  --gold:   #c4a882;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── CURSOR ── */
+* { cursor: none; }
+#cur { width: 8px; height: 8px; background: var(--rose); border-radius: 50%; position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%,-50%); }
+#cur-r { width: 32px; height: 32px; border: 1px solid var(--rose-l); border-radius: 50%; position: fixed; z-index: 9998; pointer-events: none; transform: translate(-50%,-50%); transition: all 0.12s ease-out; opacity: 0.5; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px; padding: 0 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--light);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; color: var(--ink);
+  letter-spacing: 0.01em;
+}
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--mid); text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--rose); }
+
+/* ── HERO ── */
+#home {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 55% 45%;
+  padding-top: 64px;
+}
+.hero-l {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 56px;
+  background: var(--white);
+}
+.hero-kicker {
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 32px;
+  display: flex; align-items: center; gap: 14px;
+}
+.hero-kicker::before { content: ''; width: 36px; height: 1px; background: var(--rose-l); }
+.hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 5.5vw, 82px);
+  line-height: 1.04; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.025em;
+  margin-bottom: 28px;
+}
+.hero-h1 em { font-style: italic; color: var(--rose); font-weight: 400; }
+.hero-p {
+  font-size: 17px; color: var(--warm); line-height: 1.82;
+  max-width: 420px; font-weight: 300; margin-bottom: 48px;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn {
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  font-weight: 500; text-decoration: none; padding: 13px 28px;
+  border-radius: 2px; transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-rose { background: var(--rose); color: var(--white); }
+.btn-rose:hover { background: var(--warm); transform: translateY(-1px); }
+.btn-outline { border: 1px solid var(--light); color: var(--warm); background: transparent; }
+.btn-outline:hover { border-color: var(--rose); color: var(--rose); }
+
+.hero-r {
+  background: var(--bg); position: relative;
+  display: flex; align-items: center; justify-content: center;
+  border-left: 1px solid var(--light);
+}
+.hero-r::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 35%, rgba(192,160,150,0.12) 0%, transparent 65%);
+}
+.hero-mono {
+  font-family: 'Playfair Display', serif;
+  font-size: 180px; font-weight: 700;
+  color: var(--rose-l); opacity: 0.18;
+  line-height: 1; user-select: none; position: relative; z-index: 1;
+  letter-spacing: -0.05em;
+}
+.hero-stats {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  display: grid; grid-template-columns: repeat(3,1fr);
+  border-top: 1px solid var(--light);
+}
+.hero-stat { padding: 22px 20px; background: var(--white); }
+.hero-stat + .hero-stat { border-left: 1px solid var(--light); }
+.stat-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight: 700; color: var(--ink);
+  margin-bottom: 2px;
+}
+.stat-l { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); }
+
+/* ── SECTIONS ── */
+.s { padding: 112px 0; }
+.s-alt { background: var(--bg); }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 56px; }
+.eyebrow {
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--rose-l); }
+.s-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 3.6vw, 50px);
+  line-height: 1.12; font-weight: 700; color: var(--ink);
+  letter-spacing: -0.02em; margin-bottom: 14px;
+}
+.s-title em { font-style: italic; color: var(--rose); font-weight: 400; }
+.s-lead {
+  font-size: 16px; color: var(--mid); line-height: 1.8;
+  max-width: 560px; font-weight: 300; margin-bottom: 64px;
+}
+
+/* ── ABOUT / POSITIONING ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 88px; align-items: start; }
+.about-body p { font-size: 16px; color: var(--warm); line-height: 1.9; margin-bottom: 22px; font-weight: 300; }
+.about-body p strong { color: var(--ink); font-weight: 500; }
+.about-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 36px; }
+.pill {
+  font-size: 11px; color: var(--mid); letter-spacing: 0.04em;
+  border: 1px solid var(--light); padding: 7px 16px; border-radius: 2px;
+  background: var(--white);
+}
+.axes-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--mid); margin-bottom: 24px; }
+.axis {
+  display: grid; grid-template-columns: 52px 1fr;
+  gap: 18px; padding: 22px 0;
+  border-bottom: 1px solid var(--light); align-items: start;
+}
+.axis:first-of-type { border-top: 1px solid var(--light); }
+.axis-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; color: var(--light); line-height: 1; font-weight: 700;
+}
+.axis-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--ink); margin-bottom: 3px; }
+.axis-desc { font-size: 13px; color: var(--mid); line-height: 1.7; }
+
+/* ── TOOLS ── */
+.tool-list {}
+.tool-item {
+  display: grid; grid-template-columns: 52px 1fr auto;
+  gap: 40px; padding: 48px 0;
+  border-bottom: 1px solid var(--light); align-items: start;
+  transition: background 0.25s;
+}
+.tool-item:first-child { border-top: 1px solid var(--light); }
+.tool-item:hover { background: var(--bg); margin: 0 -56px; padding-left: 56px; padding-right: 56px; }
+.tool-idx { font-size: 12px; color: var(--light); letter-spacing: 0.06em; padding-top: 4px; font-variant-numeric: tabular-nums; }
+.tool-type { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--rose); margin-bottom: 10px; }
+.tool-name { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--ink); font-weight: 700; margin-bottom: 14px; letter-spacing: -0.01em; }
+.tool-desc { font-size: 14px; color: var(--mid); line-height: 1.78; font-weight: 300; max-width: 520px; margin-bottom: 16px; }
+.tool-impact { font-size: 13px; color: var(--rose); font-style: italic; }
+.tool-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.tool-tag { font-size: 11px; color: var(--mid); border: 1px solid var(--light); padding: 5px 12px; border-radius: 1px; letter-spacing: 0.03em; }
+.tool-demo { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; padding-top: 4px; }
+.demo-btn {
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--rose); text-decoration: none; border: 1px solid var(--rose-l);
+  padding: 8px 18px; border-radius: 2px; white-space: nowrap;
+  transition: all 0.2s;
+}
+.demo-btn:hover { background: var(--rose); color: var(--white); border-color: var(--rose); }
+.gh-link {
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--mid); text-decoration: none;
+  display: flex; align-items: center; gap: 6px;
+}
+.gh-link:hover { color: var(--ink); }
+
+/* ── CITED ── */
+.cited-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--light); }
+.cited-card { background: var(--white); padding: 36px 30px; transition: background 0.2s; }
+.cited-card:hover { background: var(--bg); }
+.cited-outlet { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--ink); margin-bottom: 10px; }
+.cited-desc { font-size: 13px; color: var(--mid); line-height: 1.7; font-weight: 300; }
+.cited-type { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rose); margin-top: 16px; }
+
+/* ── CAPS ── */
+.cap-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--light); }
+.cap-col { background: var(--bg); padding: 40px 32px; }
+.cap-title { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--rose-l); }
+.cap-item { font-size: 13px; color: var(--warm); margin-bottom: 11px; padding-left: 13px; position: relative; line-height: 1.5; }
+.cap-item::before { content: ''; position: absolute; left: 0; top: 7px; width: 4px; height: 4px; border-radius: 50%; background: var(--rose-l); }
+
+/* ── EXPERIENCE TIMELINE ── */
+.tl { position: relative; padding-left: 32px; }
+.tl::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: var(--light); }
+.tl-item {
+  display: grid; grid-template-columns: 180px 1fr;
+  gap: 48px; padding: 48px 0;
+  border-bottom: 1px solid var(--light);
+  position: relative;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.tl-item.revealed { opacity: 1; transform: translateY(0); }
+.tl-item:last-child { border-bottom: none; }
+.tl-item::before {
+  content: ''; position: absolute;
+  left: -37px; top: 56px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--rose-l); border: 2px solid var(--white);
+  transition: background 0.25s;
+}
+.tl-item:hover::before { background: var(--rose); }
+.tl-period { font-size: 11px; color: var(--rose); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+.tl-co { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--ink); margin-bottom: 3px; }
+.tl-loc { font-size: 11px; color: var(--mid); }
+.tl-role { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--ink); font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
+.tl-ctx { font-size: 13px; color: var(--rose); font-style: italic; margin-bottom: 18px; }
+.tl-pts { list-style: none; }
+.tl-pts li { font-size: 14px; color: var(--warm); margin-bottom: 11px; padding-left: 16px; position: relative; line-height: 1.72; font-weight: 300; }
+.tl-pts li::before { content: ''; position: absolute; left: 0; top: 8px; width: 4px; height: 4px; border-radius: 50%; background: var(--rose-l); }
+.tl-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
+.tl-tag { font-size: 11px; color: var(--mid); border: 1px solid var(--light); padding: 4px 12px; border-radius: 1px; }
+.edu-block { border-top: 1px solid var(--light); margin-top: 48px; padding-top: 48px; }
+.edu-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--mid); margin-bottom: 28px; }
+.edu-row { display: grid; grid-template-columns: 180px 1fr; gap: 48px; margin-bottom: 22px; align-items: baseline; }
+.edu-yr { font-size: 11px; color: var(--mid); }
+.edu-inst { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--ink); margin-bottom: 2px; }
+.edu-cred { font-size: 13px; color: var(--mid); }
+
+/* ── CONNECT ── */
+#connect { background: var(--white); }
+.connect-inner { max-width: 640px; }
+.connect-h {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(44px, 5vw, 68px);
+  line-height: 1.06; font-weight: 700; color: var(--ink);
+  letter-spacing: -0.025em; margin-bottom: 28px;
+}
+.connect-h em { font-style: italic; color: var(--rose); font-weight: 400; }
+.connect-p { font-size: 16px; color: var(--warm); line-height: 1.8; margin-bottom: 40px; font-weight: 300; max-width: 480px; }
+.connect-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.c-link {
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid var(--rose); padding-bottom: 3px;
+  transition: color 0.2s;
+}
+.c-link:hover { color: var(--rose); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg); border-top: 1px solid var(--light);
+  padding: 28px 56px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.f-name { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--ink); }
+.f-copy { font-size: 11px; color: var(--mid); letter-spacing: 0.05em; }
+
+/* ── FADE UP ── */
+.fu { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fu.on { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 0 24px; } .nav-links { display: none; }
+  #home { grid-template-columns: 1fr; } .hero-r { display: none; }
+  .hero-l { padding: 60px 24px; }
+  .wrap { padding: 0 24px; } .s { padding: 80px 0; }
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .tool-item { grid-template-columns: 1fr; gap: 16px; }
+  .tool-demo { align-items: flex-start; }
+  .cited-grid, .cap-grid { grid-template-columns: 1fr; }
+  .tl { padding-left: 20px; }
+  .tl-item { grid-template-columns: 1fr; gap: 8px; }
+  .tl-item::before { left: -25px; }
+  .edu-row { grid-template-columns: 1fr; gap: 4px; }
+  footer { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Camille Hoy</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#tools">Built</a></li>
+    <li><a href="#cited">Cited</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-l">
+    <p class="hero-kicker">Research and Insights Strategist</p>
+    <h1 class="hero-h1">Camille<br><em>Hoy</em></h1>
+    <p class="hero-p">Curious about how people think, feel, and decide. Building the systems that turn that curiosity into something companies can actually use.</p>
+    <div class="hero-actions">
+      <a href="#experience" class="btn btn-rose">View Experience</a>
+      <a href="#connect" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-r">
+    <div class="hero-mono">CH</div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-n">50+</div>
+        <div class="stat-l">Programs Annually</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-n">4+</div>
+        <div class="stat-l">Years</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-n">3</div>
+        <div class="stat-l">Languages</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="s">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="fu">
+        <p class="eyebrow">About</p>
+        <h2 class="s-title">Data, strategy,<br>and <em>execution</em></h2>
+        <div class="about-body" style="margin-top:32px">
+          <p>Research and insights strategist at the crossroads of data, strategy, and execution. Four years designing and running programs that help organizations understand the people they serve — consumers, patients, voters, business owners — and act on what they find.</p>
+          <p>What drives the work is <strong>genuine curiosity</strong>. Not collecting data for its own sake, but finding the insight that shifts something. The outlier that reframes the question. The pattern that nobody thought to look for.</p>
+          <p>Comfortable working at every level — from methodology with data scientists to two-slide briefings for executives. Fluent across industries because every industry is ultimately about people and what they need.</p>
+        </div>
+        <div class="about-pills">
+          <span class="pill">Research Operations</span>
+          <span class="pill">Economic Research</span>
+          <span class="pill">Policy Research</span>
+          <span class="pill">Consumer Insights</span>
+          <span class="pill">Strategy and Ops</span>
+          <span class="pill">Customer Success</span>
+          <span class="pill">AI-Powered Research</span>
+          <span class="pill">Cross-Functional Execution</span>
+        </div>
+      </div>
+      <div class="fu">
+        <p class="axes-label">How I work</p>
+        <div class="axis">
+          <div class="axis-n">01</div>
+          <div>
+            <p class="axis-title">Data</p>
+            <p class="axis-desc">SQL, Python, NLP pipelines, dashboards. The infrastructure that makes insight repeatable and fast.</p>
+          </div>
+        </div>
+        <div class="axis">
+          <div class="axis-n">02</div>
+          <div>
+            <p class="axis-title">Strategy</p>
+            <p class="axis-desc">Translating ambiguous questions into research that informs real decisions across product, policy, and GTM.</p>
+          </div>
+        </div>
+        <div class="axis">
+          <div class="axis-n">03</div>
+          <div>
+            <p class="axis-title">Execution</p>
+            <p class="axis-desc">Milestones, vendors, compliance, stakeholder alignment. Making sure the work lands on time, every time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools" class="s s-alt">
+  <div class="wrap">
+    <div class="fu" style="margin-bottom:64px">
+      <p class="eyebrow">Things I have built</p>
+      <h2 class="s-title">Tools that came from<br>seeing a <em>better way</em></h2>
+      <p class="s-lead">Each one started with identifying a gap in how research was being done and building something to close it.</p>
+    </div>
+    <div class="tool-list fu">
+
+      <div class="tool-item">
+        <p class="tool-idx">001</p>
+        <div>
+          <p class="tool-type">Data Visualization</p>
+          <h3 class="tool-name">Data Output Banner</h3>
+          <p class="tool-desc">Designed a standardized data output system that automated clean table generation across recurring research programs. Identified that manual formatting was the bottleneck between data collection and delivery and built a system to remove it.</p>
+          <p class="tool-impact">Reduced reporting time from several weeks to a few days across 50+ annual programs.</p>
+          <div class="tool-tags" style="margin-top:16px">
+            <span class="tool-tag">SQL</span>
+            <span class="tool-tag">Python</span>
+            <span class="tool-tag">Tableau</span>
+            <span class="tool-tag">Automation</span>
+          </div>
+        </div>
+        <div class="tool-demo">
+          <a href="#" class="demo-btn">Live Demo</a>
+          <a href="https://github.com/camahoy" target="_blank" class="gh-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="tool-item">
+        <p class="tool-idx">002</p>
+        <div>
+          <p class="tool-type">Operations Infrastructure</p>
+          <h3 class="tool-name">Research Ops Organizer</h3>
+          <p class="tool-desc">Built a Notion-based program management system to track concurrent research programs, deadlines, and client deliverables. Identified that version confusion and manual check-ins were slowing cross-functional teams down and designed a single source of truth to fix it.</p>
+          <p class="tool-impact">Kept 50+ concurrent annual programs aligned without manual coordination overhead.</p>
+          <div class="tool-tags" style="margin-top:16px">
+            <span class="tool-tag">Notion</span>
+            <span class="tool-tag">Program Management</span>
+            <span class="tool-tag">SOP Design</span>
+            <span class="tool-tag">Compliance Tracking</span>
+          </div>
+        </div>
+        <div class="tool-demo">
+          <a href="#" class="demo-btn">Live Demo</a>
+          <a href="https://github.com/camahoy" target="_blank" class="gh-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="tool-item">
+        <p class="tool-idx">003</p>
+        <div>
+          <p class="tool-type">AI-Powered Knowledge System</p>
+          <h3 class="tool-name">Research Brain</h3>
+          <p class="tool-desc">Developed a living research repository that maintains intelligence on client landscapes, competitive context, and prior findings across program waves. Built to solve the problem of institutional knowledge getting buried between engagements.</p>
+          <p class="tool-impact">Faster study design and zero repeated insights across longitudinal programs.</p>
+          <div class="tool-tags" style="margin-top:16px">
+            <span class="tool-tag">AI Tools</span>
+            <span class="tool-tag">NLP</span>
+            <span class="tool-tag">Literature Review</span>
+            <span class="tool-tag">Knowledge Management</span>
+          </div>
+        </div>
+        <div class="tool-demo">
+          <a href="#" class="demo-btn">Live Demo</a>
+          <a href="https://github.com/camahoy" target="_blank" class="gh-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CITED -->
+<section id="cited" class="s">
+  <div class="wrap">
+    <div class="fu" style="margin-bottom:56px">
+      <p class="eyebrow">Where my work has appeared</p>
+      <h2 class="s-title">Cited</h2>
+    </div>
+    <div class="cited-grid fu">
+      <div class="cited-card">
+        <p class="cited-outlet">Reuters</p>
+        <p class="cited-desc">Economic and consumer research cited in national coverage on U.S. market sentiment and business conditions.</p>
+        <p class="cited-type">Economic Research</p>
+      </div>
+      <div class="cited-card">
+        <p class="cited-outlet">ABC News</p>
+        <p class="cited-desc">Public opinion research on policy and consumer behavior used in national broadcast reporting.</p>
+        <p class="cited-type">Public Opinion</p>
+      </div>
+      <div class="cited-card">
+        <p class="cited-outlet">The Washington Post</p>
+        <p class="cited-desc">Consumer and policy research featured in reporting on U.S. economic trends and public sentiment.</p>
+        <p class="cited-type">Policy Research</p>
+      </div>
+      <div class="cited-card">
+        <p class="cited-outlet">LSEG Consumer Tracker</p>
+        <p class="cited-desc">Authored weekly write-ups and insight memos on U.S. consumer economic sentiment for financial markets audiences.</p>
+        <p class="cited-type">Economic Tracker</p>
+      </div>
+      <div class="cited-card">
+        <p class="cited-outlet">Dove Press</p>
+        <p class="cited-desc">Published contributor, quantitative analysis for a peer-reviewed multicountry patient study. International Journal of COPD, 2023.</p>
+        <p class="cited-type">Published Research</p>
+      </div>
+      <div class="cited-card">
+        <p class="cited-outlet">Client Research</p>
+        <p class="cited-desc">Strategy and policy research informing decisions at Google, Mastercard, Visa, World Bank, U.S. Chamber of Commerce, Pew, CDC, AARP, and DHA.</p>
+        <p class="cited-type">Fortune 500 and Government</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities" class="s s-alt">
+  <div class="wrap">
+    <div class="fu" style="margin-bottom:56px">
+      <p class="eyebrow">What I work with</p>
+      <h2 class="s-title">Capabilities</h2>
+    </div>
+    <div class="cap-grid fu" style="margin-bottom:1px">
+      <div class="cap-col">
+        <p class="cap-title">Research and Strategy</p>
+        <p class="cap-item">Economic and policy research</p>
+        <p class="cap-item">Mixed-methods research design</p>
+        <p class="cap-item">Literature reviews and synthesis</p>
+        <p class="cap-item">Consumer and social insights</p>
+        <p class="cap-item">Brand and reputation research</p>
+        <p class="cap-item">Longitudinal tracking studies</p>
+        <p class="cap-item">Go-to-market research</p>
+        <p class="cap-item">Competitive intelligence</p>
+      </div>
+      <div class="cap-col">
+        <p class="cap-title">Operations and Delivery</p>
+        <p class="cap-item">Program scoping and workplanning</p>
+        <p class="cap-item">Milestone and capacity planning</p>
+        <p class="cap-item">Vendor and partner management</p>
+        <p class="cap-item">SOP development and data QA</p>
+        <p class="cap-item">IRB, GDPR, ISO-27001 compliance</p>
+        <p class="cap-item">Cross-functional alignment</p>
+        <p class="cap-item">Client success and retention</p>
+        <p class="cap-item">Executive communication</p>
+      </div>
+      <div class="cap-col">
+        <p class="cap-title">Technical and AI</p>
+        <p class="cap-item">Python (Pandas, NumPy)</p>
+        <p class="cap-item">SQL and BigQuery</p>
+        <p class="cap-item">Tableau and SPSS</p>
+        <p class="cap-item">NLP pipelines</p>
+        <p class="cap-item">Conjoint, MaxDiff, regression</p>
+        <p class="cap-item">Claude, NotebookLM, Gemini</p>
+        <p class="cap-item">Listen Labs and Outset</p>
+        <p class="cap-item">AI-assisted qualitative synthesis</p>
+      </div>
+    </div>
+    <div class="cap-grid fu" style="margin-top:1px">
+      <div class="cap-col">
+        <p class="cap-title">Industries</p>
+        <p class="cap-item">Economic and financial services</p>
+        <p class="cap-item">Public policy and government</p>
+        <p class="cap-item">Consumer and retail</p>
+        <p class="cap-item">Healthcare and public health</p>
+        <p class="cap-item">Technology and AI</p>
+        <p class="cap-item">Corporate reputation</p>
+        <p class="cap-item">Global development</p>
+        <p class="cap-item">Social and political research</p>
+      </div>
+      <div class="cap-col">
+        <p class="cap-title">Audiences Researched</p>
+        <p class="cap-item">SMB owners and entrepreneurs</p>
+        <p class="cap-item">Healthcare patients and caregivers</p>
+        <p class="cap-item">Older adults and veterans</p>
+        <p class="cap-item">Low-income and underserved groups</p>
+        <p class="cap-item">Financial markets participants</p>
+        <p class="cap-item">Policymakers and officials</p>
+        <p class="cap-item">C-suite and senior executives</p>
+        <p class="cap-item">General population and consumers</p>
+      </div>
+      <div class="cap-col">
+        <p class="cap-title">Languages</p>
+        <p class="cap-item">English (native)</p>
+        <p class="cap-item">French (native/bilingual)</p>
+        <p class="cap-item">Spanish (intermediate)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="s">
+  <div class="wrap">
+    <div class="fu" style="margin-bottom:72px">
+      <p class="eyebrow">Experience</p>
+      <h2 class="s-title">Where I have worked</h2>
+      <p class="s-lead">Four years across industries, audiences, and problem types. Each program a new context. Each client a new way of seeing what research can do.</p>
+    </div>
+    <div class="tl">
+
+      <div class="tl-item">
+        <div>
+          <p class="tl-period">2022 — Now</p>
+          <p class="tl-co">Ipsos Public Affairs</p>
+          <p class="tl-loc">San Francisco, CA</p>
+        </div>
+        <div>
+          <h3 class="tl-role">Senior Research Analyst</h3>
+          <p class="tl-ctx">Global research and strategy consultancy. 50+ programs annually across Fortune 500, federal agencies, and policy institutions.</p>
+          <ul class="tl-pts">
+            <li>Led end-to-end execution of economic, policy, consumer, healthcare, financial services, and social research programs for Google, Mastercard, Visa, LSEG, World Bank, U.S. Chamber of Commerce, Pew, AARP, CDC, DHA, and Hilton.</li>
+            <li>Researched diverse audiences including SMB owners, healthcare patients and caregivers, older adults, veterans, low-income groups, and financial markets participants across national and global programs.</li>
+            <li>Built automated output systems, NLP pipelines, and SOP libraries that reduced reporting time from weeks to days and eliminated manual formatting bottlenecks across recurring programs.</li>
+            <li>Managed all research milestones, vendor relationships, IRB and GDPR compliance, and client touchpoints across 50+ concurrent programs simultaneously.</li>
+            <li>Authored weekly LSEG Consumer Tracker write-ups and monthly leadership updates. Produced briefings cited in Reuters, ABC News, and The Washington Post.</li>
+            <li>Supported team recruitment, contractor sourcing, and analyst onboarding. Built documentation that reduced ramp time and standardized quality across all workstreams.</li>
+          </ul>
+          <div class="tl-tags">
+            <span class="tl-tag">Economic Research</span>
+            <span class="tl-tag">Policy Research</span>
+            <span class="tl-tag">Research Operations</span>
+            <span class="tl-tag">Python</span>
+            <span class="tl-tag">SQL</span>
+            <span class="tl-tag">NLP</span>
+            <span class="tl-tag">Client Strategy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div>
+          <p class="tl-period">2023</p>
+          <p class="tl-co">Dove Press</p>
+          <p class="tl-loc">International Journal of COPD</p>
+        </div>
+        <div>
+          <h3 class="tl-role">Published Research Contributor</h3>
+          <p class="tl-ctx">Peer-reviewed academic publication.</p>
+          <ul class="tl-pts">
+            <li>Led quantitative data analysis for a multicountry study on patient perception of COPD exacerbations.</li>
+          </ul>
+          <div class="tl-tags">
+            <span class="tl-tag">Healthcare Research</span>
+            <span class="tl-tag">Quantitative Analysis</span>
+            <span class="tl-tag">Published Research</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div>
+          <p class="tl-period">2020 — 2022</p>
+          <p class="tl-co">Viobi, LLC</p>
+          <p class="tl-loc">Remote</p>
+        </div>
+        <div>
+          <h3 class="tl-role">Business Intelligence and Communications Manager</h3>
+          <p class="tl-ctx">Digital strategy consultancy for SMB clients. Built reporting and analytics infrastructure from scratch.</p>
+          <ul class="tl-pts">
+            <li>Designed and built a consolidated reporting system integrating CRM, advertising, and sales data, improving ROI tracking accuracy by 30 percent.</li>
+            <li>Translated performance data into acquisition, retention, and messaging recommendations adopted directly into client growth strategy.</li>
+          </ul>
+          <div class="tl-tags">
+            <span class="tl-tag">Business Intelligence</span>
+            <span class="tl-tag">Tableau</span>
+            <span class="tl-tag">Analytics</span>
+            <span class="tl-tag">Client Strategy</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="edu-block fu">
+      <p class="edu-label">Education and Continuous Learning</p>
+      <div class="edu-row">
+        <p class="edu-yr">In Progress</p>
+        <div><p class="edu-inst">MIT MicroMasters</p><p class="edu-cred">Data, Economics, and Design of Policy</p></div>
+      </div>
+      <div class="edu-row">
+        <p class="edu-yr">2017 — 2020</p>
+        <div><p class="edu-inst">University of Westminster</p><p class="edu-cred">BA (Hons), Politics and International Relations</p></div>
+      </div>
+      <div class="edu-row">
+        <p class="edu-yr">2017</p>
+        <div><p class="edu-inst">French Baccalaur&#233;at ES</p><p class="edu-cred">Economics and Social Sciences</p></div>
+      </div>
+      <div class="edu-row">
+        <p class="edu-yr">In Progress</p>
+        <div><p class="edu-inst">Google</p><p class="edu-cred">Advanced Data Analysis Certificate</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section id="connect" class="s">
+  <div class="wrap">
+    <div class="connect-inner fu">
+      <h2 class="connect-h">Let's<br><em>talk</em></h2>
+      <p class="connect-p">Always open to conversations about research, AI, strategy, data, policy — or how people actually think and what to do about it.</p>
+      <div class="connect-links">
+        <a href="mailto:camilleahoy@gmail.com" class="c-link">camilleahoy@gmail.com</a>
+        <a href="https://linkedin.com/in/camille-hoy" target="_blank" class="c-link">LinkedIn</a>
+        <a href="https://camillehoy.com" class="c-link">camillehoy.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-name">Camille Hoy</div>
+  <p class="f-copy">2025 — San Francisco</p>
+</footer>
+
+<script>
+  // Cursor
+  const c = document.getElementById('cur');
+  const r = document.getElementById('cur-r');
+  document.addEventListener('mousemove', e => {
+    c.style.left = e.clientX + 'px'; c.style.top = e.clientY + 'px';
+    setTimeout(() => { r.style.left = e.clientX + 'px'; r.style.top = e.clientY + 'px'; }, 90);
+  });
+
+  // Fade up
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+
+  // Timeline reveal one by one as you scroll
+  const tlObs = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); tlObs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.tl-item').forEach(el => tlObs.observe(el));
+</script>
+</body>
+</html>

@@ -1,22 +1,32 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useEffect, useRef } from 'react'
 
-const NODES = [
-  { x: 30, y: 25, r: 4 },
-  { x: 62, y: 18, r: 3 },
-  { x: 78, y: 42, r: 5 },
-  { x: 50, y: 55, r: 3.5 },
-  { x: 20, y: 58, r: 4 },
-  { x: 85, y: 72, r: 3 },
-  { x: 45, y: 80, r: 4 },
-  { x: 68, y: 88, r: 3 },
+const findings = [
+  {
+    stat: '62%',
+    finding: 'of consumers cite inflation as their primary financial concern — job security anxiety rising +8pp wave-over-wave',
+    source: 'LSEG Consumer Tracker',
+    wave: 'Wave 14 · 2024',
+    method: 'Quant · n=2,000',
+  },
+  {
+    stat: '44% vs 29%',
+    finding: 'AI tool adoption gap between retail and service-sector SMBs; privacy concerns the primary stated barrier',
+    source: 'Google SMB Study',
+    wave: 'Q1 2024',
+    method: 'Quant · n=1,500',
+  },
+  {
+    stat: 'Published',
+    finding: 'Quantitative contributor, multicountry patient perception study on COPD exacerbations',
+    source: 'Int\'l Journal of COPD',
+    wave: 'Dove Press · 2023',
+    method: 'Peer-reviewed',
+  },
 ]
 
-const EDGES = [
-  [0, 1], [1, 2], [2, 3], [3, 4], [3, 5], [5, 6], [6, 7], [0, 4], [2, 5],
-]
+const methods = ['Survey design', 'NLP / text analysis', 'Conjoint & MaxDiff', 'Regression', 'Qual synthesis', 'Longitudinal tracking']
 
 export default function Hero() {
   return (
@@ -95,140 +105,71 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* RIGHT — animated research graph */}
+      {/* RIGHT — research output panel */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.4 }}
-        className="relative flex items-center justify-center border-l border-light overflow-hidden"
+        transition={{ duration: 0.7, delay: 0.35 }}
+        className="border-l border-light flex flex-col overflow-hidden"
         style={{ background: 'var(--bg)' }}
       >
-        {/* radial glow */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(ellipse at 60% 35%, rgba(192,160,150,0.15) 0%, transparent 65%)',
-          }}
-        />
+        {/* Header */}
+        <div className="px-8 pt-10 pb-5 border-b border-light">
+          <p className="text-[9px] tracking-[0.32em] uppercase text-mid">
+            Selected Findings
+          </p>
+        </div>
 
-        {/* animated SVG graph */}
-        <ResearchGraph />
-
-        {/* Stats bar */}
-        <div
-          className="absolute bottom-0 left-0 right-0 grid border-t border-light"
-          style={{ gridTemplateColumns: 'repeat(3,1fr)' }}
-        >
-          {[
-            { n: '50+', l: 'Programs Annually' },
-            { n: '4+', l: 'Years' },
-            { n: '3', l: 'Languages' },
-          ].map((s, i) => (
+        {/* Finding rows */}
+        <div className="flex-1 overflow-hidden divide-y divide-light">
+          {findings.map((f, i) => (
             <motion.div
-              key={s.l}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 + i * 0.1 }}
-              className={`px-5 py-[22px] bg-white ${i > 0 ? 'border-l border-light' : ''}`}
+              key={f.source}
+              initial={{ opacity: 0, x: 12 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.55 + i * 0.14 }}
+              className="px-8 py-6"
             >
-              <div className="font-serif text-[32px] font-bold text-ink mb-0.5 leading-none">
-                {s.n}
+              <div className="flex items-baseline gap-3 mb-2">
+                <span className="font-serif text-[22px] font-bold text-ink leading-none tracking-[-0.02em]">
+                  {f.stat}
+                </span>
+                <span className="text-[9px] tracking-[0.18em] uppercase text-rose">
+                  {f.method}
+                </span>
               </div>
-              <div className="text-[10px] tracking-wider uppercase text-mid">
-                {s.l}
+              <p className="text-[12px] text-warm leading-[1.7] font-light mb-3">
+                {f.finding}
+              </p>
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-medium text-ink">{f.source}</span>
+                <span className="text-light">·</span>
+                <span className="text-[10px] text-mid">{f.wave}</span>
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Methods footer */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1.0 }}
+          className="border-t border-light px-8 py-5"
+          style={{ background: 'var(--bg2)' }}
+        >
+          <p className="text-[9px] tracking-[0.28em] uppercase text-mid mb-3">
+            Methods
+          </p>
+          <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+            {methods.map((m) => (
+              <span key={m} className="text-[11px] text-warm">
+                {m}
+              </span>
+            ))}
+          </div>
+        </motion.div>
       </motion.div>
     </section>
-  )
-}
-
-function ResearchGraph() {
-  return (
-    <svg
-      viewBox="0 0 100 100"
-      className="w-[320px] h-[320px] relative z-10"
-      style={{ filter: 'drop-shadow(0 0 24px rgba(160,130,120,0.08))' }}
-    >
-      {/* Edges */}
-      {EDGES.map(([a, b], i) => (
-        <motion.line
-          key={i}
-          x1={NODES[a].x}
-          y1={NODES[a].y}
-          x2={NODES[b].x}
-          y2={NODES[b].y}
-          stroke="#c9ada7"
-          strokeWidth="0.4"
-          strokeDasharray="40"
-          strokeDashoffset="40"
-          initial={{ strokeDashoffset: 40, opacity: 0 }}
-          animate={{ strokeDashoffset: 0, opacity: 0.6 }}
-          transition={{ duration: 0.8, delay: 0.6 + i * 0.12, ease: 'easeOut' }}
-        />
-      ))}
-
-      {/* Nodes */}
-      {NODES.map((node, i) => (
-        <motion.g key={i}>
-          <motion.circle
-            cx={node.x}
-            cy={node.y}
-            r={node.r * 2.5}
-            fill="rgba(192,160,150,0.08)"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
-          />
-          <motion.circle
-            cx={node.x}
-            cy={node.y}
-            r={node.r}
-            fill="#c9ada7"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.55 + i * 0.1, type: 'spring', stiffness: 200 }}
-          />
-        </motion.g>
-      ))}
-
-      {/* Pulsing center label */}
-      <motion.text
-        x="50"
-        y="50"
-        textAnchor="middle"
-        dominantBaseline="middle"
-        fill="#a08278"
-        fontSize="4"
-        fontFamily="var(--font-dm-sans)"
-        letterSpacing="0.3"
-        textDecoration="none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.7 }}
-        transition={{ duration: 0.8, delay: 1.4 }}
-        style={{ textTransform: 'uppercase' }}
-      >
-        Research
-      </motion.text>
-      <motion.text
-        x="50"
-        y="55"
-        textAnchor="middle"
-        dominantBaseline="middle"
-        fill="#a08278"
-        fontSize="3.5"
-        fontFamily="var(--font-dm-sans)"
-        letterSpacing="0.25"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.5 }}
-        transition={{ duration: 0.8, delay: 1.6 }}
-        style={{ textTransform: 'uppercase' }}
-      >
-        Intelligence
-      </motion.text>
-    </svg>
   )
 }

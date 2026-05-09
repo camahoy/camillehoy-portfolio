@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f0eeeb;
+  --bg-alt: #faf9f7;
+  --ink: #1a1816;
+  --warm: #4a4540;
+  --muted: #6b6560;
+  --border: #c0bbb4;
+  --divider: #ddd8d0;
+  --rose: #a08278;
+  --rose-l: #c9ada7;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Section label */
+.label {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rose);
+  padding-top: 4px;
+}
+
+/* Section wrapper — consistent two-column grid */
+.section-grid {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 64px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 52px;
+}
+
+/* Section divider */
+.section-divider {
+  border: none;
+  border-top: 0.5px solid var(--divider);
+  margin: 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }

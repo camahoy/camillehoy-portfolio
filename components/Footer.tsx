@@ -1,11 +1,18 @@
 export default function Footer() {
   return (
     <footer
-      className="border-t border-light px-14 py-7 flex justify-between items-center flex-wrap gap-3"
-      style={{ background: 'var(--bg)' }}
+      className="flex justify-between items-center flex-wrap gap-3"
+      style={{
+        borderTop: '0.5px solid #ddd8d0',
+        background: '#f0eeeb',
+        padding: '28px 52px',
+        maxWidth: '100%',
+      }}
     >
-      <span className="font-serif text-[15px] text-ink">Camille Hoy</span>
-      <span className="text-[11px] text-mid tracking-[0.05em]">
+      <span className="text-[12px] font-normal text-ink tracking-[-0.01em]">
+        Camille Hoy
+      </span>
+      <span className="text-[11px] font-light text-muted">
         2025 — San Francisco
       </span>
     </footer>

@@ -9,25 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: '#1e1916',
+        bg: '#f0eeeb',
+        'bg-alt': '#faf9f7',
+        ink: '#1a1816',
         warm: '#4a4540',
-        mid: '#8c8480',
-        light: '#ddd8d0',
+        muted: '#6b6560',
+        border: '#c0bbb4',
+        divider: '#ddd8d0',
         rose: '#a08278',
         'rose-l': '#c9ada7',
-        'rose-x': '#f0e6e3',
-        gold: '#c4a882',
-        bg: '#faf8f5',
-        bg2: '#f3efe9',
       },
       fontFamily: {
-        serif: ['var(--font-playfair)', 'Georgia', 'serif'],
-        sans: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
-      letterSpacing: {
-        widest: '0.28em',
-        wider: '0.12em',
-        wide: '0.06em',
+      maxWidth: {
+        content: '1080px',
       },
     },
   },

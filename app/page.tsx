@@ -1,10 +1,8 @@
-import CustomCursor from '@/components/CustomCursor'
 import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Tools from '@/components/Tools'
 import Cited from '@/components/Cited'
-import Capabilities from '@/components/Capabilities'
 import Experience from '@/components/Experience'
 import Connect from '@/components/Connect'
 import Footer from '@/components/Footer'
@@ -12,15 +10,18 @@ import Footer from '@/components/Footer'
 export default function Home() {
   return (
     <>
-      <CustomCursor />
       <Nav />
       <main>
         <Hero />
+        <hr className="section-divider" />
         <About />
+        <hr className="section-divider" />
         <Tools />
+        <hr className="section-divider" />
         <Cited />
-        <Capabilities />
+        <hr className="section-divider" />
         <Experience />
+        <hr className="section-divider" />
         <Connect />
       </main>
       <Footer />

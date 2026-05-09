@@ -30,6 +30,7 @@ const tools = [
     impact: 'Faster study design. Zero repeated insights.',
     tags: ['AI Tools', 'NLP', 'Literature Review', 'Knowledge Management'],
     demoHref: '/demo/research-brain',
+    githubHref: 'https://github.com/camahoy/Research-Repo',
   },
 ]
 
@@ -108,7 +109,7 @@ export default function Tools() {
                     Live Demo
                   </Link>
                   <a
-                    href="https://github.com/camahoy"
+                    href={'githubHref' in tool ? tool.githubHref : 'https://github.com/camahoy'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[11px] font-light uppercase tracking-[0.1em] text-ink no-underline text-center py-2.5 px-4 transition-colors hover:border-ink"

@@ -14,12 +14,9 @@ const pills = [
 export default function Hero() {
   return (
     <section className="pt-32 pb-20">
-      <div className="max-w-content mx-auto px-[52px]">
+      <div className="max-w-content mx-auto px-5 md:px-[52px]">
         {/* Two-column: name left, description right */}
-        <div
-          className="grid items-start mb-16"
-          style={{ gridTemplateColumns: '55% 1fr', gap: '64px' }}
-        >
+        <div className="grid-hero mb-12 md:mb-16">
           {/* Left: name */}
           <div>
             <motion.div
@@ -30,7 +27,7 @@ export default function Hero() {
               <p
                 className="text-ink"
                 style={{
-                  fontSize: '52px',
+                  fontSize: 'clamp(36px, 6vw, 52px)',
                   fontWeight: 500,
                   letterSpacing: '-0.03em',
                   lineHeight: 1.08,
@@ -65,11 +62,8 @@ export default function Hero() {
           </motion.p>
         </div>
 
-        {/* 6 round pills in 3×2 grid */}
-        <div
-          className="grid gap-3"
-          style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}
-        >
+        {/* 6 round pills — 3 cols on md+, 2 cols on mobile */}
+        <div className="grid gap-3 grid-cols-2 md:grid-cols-3">
           {pills.map((pill, i) => (
             <motion.div
               key={pill}

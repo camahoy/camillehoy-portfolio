@@ -53,20 +53,19 @@ export default function Tools() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="grid py-10 items-start"
-                style={{
-                  gridTemplateColumns: '40px 1fr 140px',
-                  gap: '32px',
-                  borderTop: '0.5px solid #ddd8d0',
-                }}
+                className="grid-tools-card"
               >
-                {/* Index */}
-                <span className="text-[12px] font-light text-rose-l pt-0.5 tabular-nums">
+                {/* Index — hidden on mobile via CSS */}
+                <span className="tools-index-col text-[12px] font-light text-rose-l pt-0.5 tabular-nums">
                   {tool.idx}
                 </span>
 
                 {/* Content */}
                 <div>
+                  {/* Show index inline on mobile */}
+                  <p className="md:hidden text-[11px] font-light text-rose-l tabular-nums mb-2">
+                    {tool.idx}
+                  </p>
                   <p className="text-[10px] font-light uppercase tracking-[0.18em] text-muted mb-2">
                     {tool.type}
                   </p>
@@ -96,7 +95,7 @@ export default function Tools() {
                 </div>
 
                 {/* Buttons */}
-                <div className="flex flex-col gap-2 pt-0.5">
+                <div className="tools-buttons-col flex flex-col gap-2 pt-0.5">
                   <Link
                     href={tool.demoHref}
                     className="text-[11px] font-light uppercase tracking-[0.1em] text-bg no-underline text-center py-2.5 px-4 transition-opacity hover:opacity-80"

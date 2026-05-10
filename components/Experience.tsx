@@ -46,11 +46,7 @@ function Role({ job, delay }: { job: (typeof jobs)[0]; delay: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.55, delay }}
-      className="grid gap-10 py-10"
-      style={{
-        gridTemplateColumns: '160px 1fr',
-        borderTop: '0.5px solid #ddd8d0',
-      }}
+      className="grid-role"
     >
       <div>
         <p className="text-[12px] font-light text-muted mb-1">{job.period}</p>
@@ -113,11 +109,7 @@ export default function Experience() {
               Education
             </p>
             {edu.map((e) => (
-              <div
-                key={e.inst}
-                className="grid gap-10 mb-4 items-baseline"
-                style={{ gridTemplateColumns: '160px 1fr' }}
-              >
+              <div key={e.inst} className="grid-edu-row">
                 <p className="text-[12px] font-light text-muted">{e.year}</p>
                 <div>
                   <p className="text-[13px] font-medium text-ink">{e.inst}</p>

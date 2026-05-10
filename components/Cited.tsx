@@ -55,7 +55,7 @@ export default function Cited() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="flex items-baseline gap-6 py-4"
+                className="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6 py-4"
                 style={{ borderBottom: '0.5px solid #ddd8d0' }}
               >
                 <span

@@ -63,8 +63,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
-            className="grid gap-12 mb-14"
-            style={{ gridTemplateColumns: '1fr 260px' }}
+            className="grid-about-inner mb-14"
           >
             {/* Body text */}
             <div className="space-y-5">

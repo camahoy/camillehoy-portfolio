@@ -98,12 +98,18 @@ body {
 @media (max-width: 767px) {
   .section-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 16px;
     padding: 0 20px;
   }
 
   .section-grid > :first-child {
     padding-bottom: 0;
+  }
+
+  /* Tighter section padding on mobile */
+  section.py-20 {
+    padding-top: 48px;
+    padding-bottom: 48px;
   }
 
   .grid-hero {

@@ -7,9 +7,10 @@ const tools = [
   {
     idx: '001',
     type: 'Data Visualization',
-    name: 'Cross Star Studio',
-    desc: 'Automated data output system that transforms raw survey tables into clean, executive-ready formats. Removed the manual formatting bottleneck between collection and delivery.',
-    impact: 'Reduced reporting time from weeks to days.',
+    name: 'Cross Stab Studio',
+    need: 'Raw data exports were eating hours of manual formatting before anything useful could be delivered.',
+    desc: 'A workflow tool for reformatting raw survey data and market research exports into clean, executive-ready formats including media releases, updated Excel tables, and client-ready outputs.',
+    impact: 'Reduced reporting time from several weeks to a few days.',
     tags: ['SQL', 'Python', 'Tableau', 'Automation'],
     demoHref: '/demo/cross-star-studio',
   },
@@ -17,8 +18,9 @@ const tools = [
     idx: '002',
     type: 'Operations Infrastructure',
     name: 'Research Ops Organizer',
-    desc: 'Notion-based program management system for concurrent research studies. Single source of truth for milestones, vendors, compliance, and capacity.',
-    impact: '50+ concurrent programs. Zero dropped threads.',
+    need: 'Running 50+ concurrent programs with no single source of truth for milestones, deliverables, or compliance.',
+    desc: 'A Notion-based program management system that tracks concurrent research studies, vendor touchpoints, compliance requirements, and team capacity in one place.',
+    impact: '50+ concurrent programs. Nothing dropped.',
     tags: ['Notion', 'Program Management', 'SOP Design'],
     demoHref: '/demo/research-ops-organizer',
   },
@@ -26,8 +28,9 @@ const tools = [
     idx: '003',
     type: 'AI Knowledge System',
     name: 'Research Brain',
-    desc: 'Living knowledge repository that follows multiple research streams simultaneously. Organizes literature, tags findings by theme, surfaces what matters across projects.',
-    impact: 'Faster study design. Zero repeated insights.',
+    need: 'Institutional knowledge was getting buried between program waves and study design was starting from scratch each time.',
+    desc: 'A living knowledge repository that follows multiple research streams simultaneously. Organizes literature, tags findings by theme, and surfaces relevant prior work so every study starts informed.',
+    impact: 'Faster, better-informed study design across every program.',
     tags: ['AI Tools', 'NLP', 'Literature Review', 'Knowledge Management'],
     demoHref: '/demo/research-brain',
   },
@@ -42,7 +45,8 @@ export default function Tools() {
         </div>
         <div>
           <p className="text-[13px] font-light text-muted italic mb-12">
-            Identified a gap. Built something to close it.
+            Research moves at the speed of the systems behind it. These tools came
+            out of needs I identified on the ground.
           </p>
 
           <div className="space-y-0">
@@ -72,6 +76,9 @@ export default function Tools() {
                   <h3 className="text-[18px] font-medium text-ink mb-3 tracking-[-0.01em]">
                     {tool.name}
                   </h3>
+                  <p className="text-[13px] font-light text-muted italic mb-2">
+                    The need: {tool.need}
+                  </p>
                   <p className="text-[13px] font-light text-warm leading-[1.9] mb-3">
                     {tool.desc}
                   </p>

@@ -15,18 +15,30 @@ export default function Connect() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className="text-[22px] font-light text-ink leading-[1.6] tracking-[-0.01em] mb-12"
+            className="text-[22px] font-light text-ink leading-[1.6] tracking-[-0.01em] mb-4"
             style={{ maxWidth: '560px' }}
           >
-            I am interested in having conversations about research, AI, strategy,
+            I am interested in having conversations about research, strategy,
             and the intersection of data and people.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-[13px] font-light text-muted leading-[1.8] mb-10"
+            style={{ maxWidth: '480px' }}
+          >
+            Whether you are building something, thinking through a research
+            problem, or just curious about the work, reach out.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             className="flex gap-8 items-center flex-wrap"
           >
             <a

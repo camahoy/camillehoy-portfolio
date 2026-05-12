@@ -5,8 +5,8 @@ import { motion } from 'framer-motion'
 const citations = [
   {
     outlet: 'Reuters',
-    desc: 'Cited in economic and consumer market sentiment coverage',
-    href: '#',
+    desc: 'Reuters/Ipsos Issues Survey May 2025',
+    href: 'https://www.ipsos.com/en-us/news-polls/reuters-ipsos-issues-survey-may-2025',
   },
   {
     outlet: 'ABC News',
@@ -15,23 +15,23 @@ const citations = [
   },
   {
     outlet: 'Washington Post',
-    desc: 'U.S. economic trends and public sentiment research',
+    desc: 'U.S. immigration approval and policy sentiment tracking, 2025',
     href: '#',
   },
   {
     outlet: 'LSEG',
-    desc: 'Weekly Consumer Tracker — economic sentiment memos',
-    href: '#',
+    desc: 'Weekly Consumer Tracker, economic sentiment memos',
+    href: 'https://www.ipsos.com/en-us/news-polls/consumer-behavior-time-covid-19',
   },
   {
-    outlet: 'Dove Press',
-    desc: 'Published contributor — International Journal of COPD, 2023',
-    href: '#',
+    outlet: 'Ipsos',
+    desc: 'Does the US-UK special relationship still exist?',
+    href: 'https://www.ipsos.com/en-us/does-us-uk-special-relationship-still-exist',
   },
   {
     outlet: 'Client Research',
     desc: 'Google · Mastercard · Visa · World Bank · Pew · CDC · AARP',
-    href: '#',
+    href: null,
   },
 ]
 
@@ -64,21 +64,26 @@ export default function Cited() {
                 >
                   {c.outlet}
                 </span>
-                <a
-                  href={c.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[13px] font-light text-warm no-underline transition-colors duration-150 hover:text-ink"
-                  style={{ textDecorationColor: 'var(--rose)' }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.textDecoration = 'underline')
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.textDecoration = 'none')
-                  }
-                >
-                  {c.desc}
-                </a>
+                {c.href ? (
+                  <a
+                    href={c.href}
+                    target={c.href !== '#' ? '_blank' : undefined}
+                    rel={c.href !== '#' ? 'noopener noreferrer' : undefined}
+                    className="text-[13px] font-light text-warm no-underline transition-colors duration-150 hover:text-ink"
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.textDecoration = 'underline')
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.textDecoration = 'none')
+                    }
+                  >
+                    {c.desc}
+                  </a>
+                ) : (
+                  <span className="text-[13px] font-light text-warm">
+                    {c.desc}
+                  </span>
+                )}
               </motion.div>
             ))}
           </div>

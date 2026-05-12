@@ -3,12 +3,13 @@
 import { motion } from 'framer-motion'
 
 const pills = [
-  '4+ Years · Economic, Policy and Consumer Research',
-  '50+ Annual Programs · Fortune 500, Federal, Policy',
-  'Research Operations · Strategy and Ops · Customer Success',
-  'Cited · Reuters · ABC News · The Washington Post',
-  'AI Tools · Python · SQL · NLP · Active Builder',
-  'Published Contributor · Dove Press 2023',
+  '4+ Years · Economic, Policy, Consumer and Social Research',
+  '50+ Annual Programs · Fortune 500, Government, Policy',
+  'Research Management · End-to-End Program Ownership',
+  'Mixed Methods · Quantitative and Qualitative Design',
+  'Insights to Action · Stakeholder Narratives · Executive Communication',
+  'Cross-Functional Execution · Vendor and Partner Management',
+  'AI-Optimized Workflows · Python · SQL · NLP',
 ]
 
 export default function Hero() {
@@ -57,29 +58,33 @@ export default function Hero() {
             className="text-[13px] font-light text-warm leading-[1.9] pt-2"
           >
             Research and insights strategist. Turning curiosity about people
-            — consumers, voters, patients — into research that organizations
-            can actually act on.
+            (consumers, voters, patients, business owners) and their attitudes,
+            behaviors, and beliefs into research that organizations can actually
+            act on.
           </motion.p>
         </div>
 
-        {/* 6 round pills — 3 cols on md+, 2 cols on mobile */}
-        <div className="grid gap-3 grid-cols-2 md:grid-cols-3">
-          {pills.map((pill, i) => (
-            <motion.div
-              key={pill}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.5 + i * 0.05 }}
-              className="text-[11px] font-light text-warm px-4 py-2.5 text-center"
-              style={{
-                borderRadius: '20px',
-                border: '0.5px solid #c0bbb4',
-                lineHeight: 1.5,
-              }}
-            >
-              {pill}
-            </motion.div>
-          ))}
+        {/* 7 pills — 2 cols, 4 rows, last pill centered */}
+        <div className="grid grid-cols-2 gap-3">
+          {pills.map((pill, i) => {
+            const isLast = i === pills.length - 1
+            return (
+              <motion.div
+                key={pill}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.5 + i * 0.05 }}
+                className={`text-[11px] font-light text-warm px-4 py-2.5 text-center${isLast ? ' col-span-2 mx-auto w-[calc(50%-6px)]' : ''}`}
+                style={{
+                  borderRadius: '20px',
+                  border: '0.5px solid #c0bbb4',
+                  lineHeight: 1.5,
+                }}
+              >
+                {pill}
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>

@@ -25,26 +25,18 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <p
-                className="text-ink"
-                style={{
-                  fontSize: 'clamp(36px, 6vw, 52px)',
-                  fontWeight: 500,
-                  letterSpacing: '-0.03em',
-                  lineHeight: 1.08,
-                }}
-              >
-                Hello, I&apos;m
+              <p style={{ fontSize: 'clamp(36px, 6vw, 52px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
+                <span style={{ fontWeight: 300, color: '#6b6560' }}>Hello, I&apos;m</span>
                 <br />
-                Camille Hoy.
+                <span style={{ fontWeight: 700, color: '#1a1816' }}>Camille Hoy.</span>
               </p>
             </motion.div>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.5 }}
-              className="mt-6 text-[20px] text-muted"
-              style={{ fontWeight: 300 }}
+              className="mt-6 text-[20px]"
+              style={{ fontWeight: 300, color: '#c17f5a' }}
             >
               ↓
             </motion.p>
@@ -74,10 +66,11 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.5 + i * 0.05 }}
-                className={`text-[11px] font-light text-warm px-4 py-2.5 text-center${isLast ? ' col-span-2 mx-auto w-[calc(50%-6px)]' : ''}`}
+                className={`text-[11px] font-light text-warm text-center${isLast ? ' col-span-2 mx-auto w-[calc(50%-6px)]' : ''}`}
                 style={{
                   borderRadius: '20px',
                   border: '0.5px solid #c0bbb4',
+                  padding: '9px 18px',
                   lineHeight: 1.5,
                 }}
               >

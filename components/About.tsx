@@ -22,15 +22,14 @@ const axes = [
 ]
 
 const pillRows = [
-  ['Economic Research', 'Consumer Insights', 'Policy Research'],
-  ['Social Research', 'Research Operations', 'Strategy and Ops'],
-  ['AI-Powered Research', 'Client Strategy and Engagement', 'Public Affairs'],
+  ['Policy, Social and Economic Research', 'Research Operations and Delivery', 'Quantitative and Qualitative Methodologies'],
+  ['Consumer Insights and Strategy', 'Client Strategy and Engagement', 'Data Processing, Analysis and Visualization'],
+  ['Multicountry and Cross-Market Research', 'Mixed Methods Research Design', 'AI-Enabled Research and Workflow Automation'],
 ]
 
 const centerIndices = new Set([1, 4, 7])
 
 export default function About() {
-  const sectionRef = useRef(null)
   const pillRef = useRef(null)
 
   const { scrollYProgress: pillProgress } = useScroll({
@@ -39,14 +38,11 @@ export default function About() {
   })
 
   const gap = useTransform(pillProgress, [0, 1], ['32px', '8px'])
-  const pillRadius = useTransform(pillProgress, [0, 1], ['20px', '3px'])
-  const centerRadius = useTransform(pillProgress, [0, 1], ['20px', '4px'])
-  const centerBorder = useTransform(pillProgress, [0, 1], ['#c0bbb4', '#a08278'])
 
   const allPills = pillRows.flat()
 
   return (
-    <section id="about" className="py-20" ref={sectionRef}>
+    <section id="about" className="py-20">
       <div className="section-grid">
         <div>
           <p className="label">About</p>
@@ -60,7 +56,7 @@ export default function About() {
             transition={{ duration: 0.5 }}
             className="text-[16px] font-medium text-ink tracking-[-0.01em] mb-8"
           >
-            Insights do not emerge. They are designed.
+            The best insights come from actually wanting to know.
           </motion.p>
 
           {/* Inner two-column: text + axes */}
@@ -69,7 +65,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
-            className="grid-about-inner mb-14"
+            className="grid-about-inner"
           >
             {/* Body text */}
             <div className="space-y-5">
@@ -113,37 +109,36 @@ export default function About() {
               ))}
             </div>
           </motion.div>
-
-          {/* 9-pill compression grid */}
-          <div ref={pillRef}>
-            <motion.div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap,
-              }}
-            >
-              {allPills.map((pill, i) => {
-                const isCenter = centerIndices.has(i)
-                return (
-                  <motion.div
-                    key={pill}
-                    className="text-[11px] font-light text-warm px-4 py-2.5 text-center"
-                    style={{
-                      borderRadius: isCenter ? centerRadius : pillRadius,
-                      border: '0.5px solid',
-                      borderColor: isCenter ? centerBorder : '#c0bbb4',
-                      background: isCenter ? '#f5f1ee' : 'transparent',
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    {pill}
-                  </motion.div>
-                )
-              })}
-            </motion.div>
-          </div>
         </div>
+      </div>
+
+      {/* Full-width 3x3 specialty pills with scroll compression */}
+      <div className="max-w-content mx-auto px-5 md:px-[52px] mt-12" ref={pillRef}>
+        <motion.div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap,
+          }}
+        >
+          {allPills.map((pill, i) => {
+            const isCenter = centerIndices.has(i)
+            return (
+              <div
+                key={pill}
+                className={`text-[11px] text-center text-warm leading-[1.5] ${isCenter ? 'font-normal' : 'font-light'}`}
+                style={{
+                  borderRadius: '4px',
+                  border: isCenter ? '1px solid #c17f5a' : '0.5px solid #c0bbb4',
+                  background: isCenter ? '#fdf4ef' : 'transparent',
+                  padding: '9px 14px',
+                }}
+              >
+                {pill}
+              </div>
+            )
+          })}
+        </motion.div>
       </div>
     </section>
   )

@@ -12,6 +12,7 @@
   --divider: #ddd8d0;
   --rose: #a08278;
   --rose-l: #c9ada7;
+  --terracotta: #c17f5a;
 }
 
 html {
@@ -32,7 +33,7 @@ body {
   font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--rose);
+  color: var(--terracotta);
   padding-top: 4px;
 }
 

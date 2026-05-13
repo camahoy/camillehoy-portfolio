@@ -46,7 +46,7 @@ export default function Nav() {
             <a
               key={l.href}
               href={l.href}
-              className="text-[11px] font-light uppercase tracking-[0.12em] text-muted no-underline hover:text-ink transition-colors duration-200"
+              className="text-[11px] font-light uppercase tracking-[0.12em] text-muted no-underline hover:text-terracotta transition-colors duration-200"
             >
               {l.label}
             </a>
@@ -94,7 +94,7 @@ export default function Nav() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setMenuOpen(false)}
-                  className="text-[12px] font-light uppercase tracking-[0.14em] text-muted no-underline hover:text-ink transition-colors duration-200"
+                  className="text-[12px] font-light uppercase tracking-[0.14em] text-muted no-underline hover:text-terracotta transition-colors duration-200"
                 >
                   {l.label}
                 </a>

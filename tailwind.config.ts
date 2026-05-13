@@ -18,6 +18,7 @@ const config: Config = {
         divider: '#ddd8d0',
         rose: '#a08278',
         'rose-l': '#c9ada7',
+        terracotta: '#c17f5a',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],

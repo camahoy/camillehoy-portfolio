@@ -82,7 +82,7 @@ export default function Tools() {
                   <p className="text-[13px] font-light text-warm leading-[1.9] mb-3">
                     {tool.desc}
                   </p>
-                  <p className="text-[13px] font-light text-muted italic mb-4">
+                  <p className="text-[13px] font-light italic mb-4" style={{ color: '#c17f5a' }}>
                     {tool.impact}
                   </p>
                   <div className="flex flex-wrap gap-2">

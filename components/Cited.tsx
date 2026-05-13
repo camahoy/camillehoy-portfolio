@@ -69,13 +69,14 @@ export default function Cited() {
                     href={c.href}
                     target={c.href !== '#' ? '_blank' : undefined}
                     rel={c.href !== '#' ? 'noopener noreferrer' : undefined}
-                    className="text-[13px] font-light text-warm no-underline transition-colors duration-150 hover:text-ink"
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.textDecoration = 'underline')
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.textDecoration = 'none')
-                    }
+                    className="text-[13px] font-light text-warm no-underline transition-colors duration-150 hover:text-terracotta"
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.textDecoration = 'underline'
+                      e.currentTarget.style.textDecorationColor = '#c17f5a'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.textDecoration = 'none'
+                    }}
                   >
                     {c.desc}
                   </a>

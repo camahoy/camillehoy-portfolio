@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 const axes = [
   {
@@ -20,19 +21,26 @@ const axes = [
   },
 ]
 
-const specialties = [
-  'Policy, Social, and Economic Research',
-  'Quantitative and Qualitative Methodologies',
-  'Data Processing and Analysis · SPSS, SQL, Python',
-  'Consumer Insights and Strategy',
-  'Research Operations and Delivery',
-  'Client Engagement and Management',
-  'Public Affairs and Global Research',
-  'Strategy and Operations',
-  'AI-Enabled Research and Tool Development',
+const pillRows = [
+  ['Policy, Social and Economic Research', 'Research Operations and Delivery', 'Quantitative and Qualitative Methodologies'],
+  ['Consumer Insights and Strategy', 'Client Strategy and Engagement', 'Data Processing, Analysis and Visualization'],
+  ['Multicountry and Cross-Market Research', 'Mixed Methods Research Design', 'AI-Enabled Research and Workflow Automation'],
 ]
 
+const centerIndices = new Set([1, 4, 7])
+
 export default function About() {
+  const pillRef = useRef(null)
+
+  const { scrollYProgress: pillProgress } = useScroll({
+    target: pillRef,
+    offset: ['start 0.9', 'center 0.6'],
+  })
+
+  const gap = useTransform(pillProgress, [0, 1], ['32px', '8px'])
+
+  const allPills = pillRows.flat()
+
   return (
     <section id="about" className="py-20">
       <div className="section-grid">
@@ -48,7 +56,7 @@ export default function About() {
             transition={{ duration: 0.5 }}
             className="text-[16px] font-medium text-ink tracking-[-0.01em] mb-8"
           >
-            Insights do not emerge. They are designed.
+            The best insights come from actually wanting to know.
           </motion.p>
 
           {/* Inner two-column: text + axes */}
@@ -104,32 +112,32 @@ export default function About() {
         </div>
       </div>
 
-      {/* Full-width specialty pills — spans both grid columns */}
-      <div className="max-w-content mx-auto px-5 md:px-[52px] mt-12">
+      {/* Full-width 3x3 specialty pills with scroll compression */}
+      <div className="max-w-content mx-auto px-5 md:px-[52px] mt-12" ref={pillRef}>
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-wrap gap-2"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap,
+          }}
         >
-          {specialties.map((s, i) => (
-            <motion.span
-              key={s}
-              initial={{ opacity: 0, y: 6 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.35, delay: i * 0.04 }}
-              className="text-[11px] font-light text-warm px-4 py-2.5"
-              style={{
-                borderRadius: '4px',
-                border: '0.5px solid #c0bbb4',
-                lineHeight: 1.5,
-              }}
-            >
-              {s}
-            </motion.span>
-          ))}
+          {allPills.map((pill, i) => {
+            const isCenter = centerIndices.has(i)
+            return (
+              <div
+                key={pill}
+                className={`text-[11px] text-center text-warm leading-[1.5] ${isCenter ? 'font-normal' : 'font-light'}`}
+                style={{
+                  borderRadius: '4px',
+                  border: isCenter ? '1px solid #c17f5a' : '0.5px solid #c0bbb4',
+                  background: isCenter ? '#fdf4ef' : 'transparent',
+                  padding: '9px 14px',
+                }}
+              >
+                {pill}
+              </div>
+            )
+          })}
         </motion.div>
       </div>
     </section>

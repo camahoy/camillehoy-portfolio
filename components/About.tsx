@@ -1,7 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const axes = [
   {
@@ -21,32 +20,21 @@ const axes = [
   },
 ]
 
-const pillRows = [
-  ['Economic Research', 'Consumer Insights', 'Policy Research'],
-  ['Social Research', 'Research Operations', 'Strategy and Ops'],
-  ['AI-Powered Research', 'Client Strategy and Engagement', 'Public Affairs'],
+const specialties = [
+  'Policy, Social, and Economic Research',
+  'Quantitative and Qualitative Methodologies',
+  'Data Processing and Analysis · SPSS, SQL, Python',
+  'Consumer Insights and Strategy',
+  'Research Operations and Delivery',
+  'Client Engagement and Management',
+  'Public Affairs and Global Research',
+  'Strategy and Operations',
+  'AI-Enabled Research and Tool Development',
 ]
 
-const centerIndices = new Set([1, 4, 7])
-
 export default function About() {
-  const sectionRef = useRef(null)
-  const pillRef = useRef(null)
-
-  const { scrollYProgress: pillProgress } = useScroll({
-    target: pillRef,
-    offset: ['start 0.9', 'center 0.6'],
-  })
-
-  const gap = useTransform(pillProgress, [0, 1], ['32px', '8px'])
-  const pillRadius = useTransform(pillProgress, [0, 1], ['20px', '3px'])
-  const centerRadius = useTransform(pillProgress, [0, 1], ['20px', '4px'])
-  const centerBorder = useTransform(pillProgress, [0, 1], ['#c0bbb4', '#a08278'])
-
-  const allPills = pillRows.flat()
-
   return (
-    <section id="about" className="py-20" ref={sectionRef}>
+    <section id="about" className="py-20">
       <div className="section-grid">
         <div>
           <p className="label">About</p>
@@ -69,7 +57,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
-            className="grid-about-inner mb-14"
+            className="grid-about-inner"
           >
             {/* Body text */}
             <div className="space-y-5">
@@ -113,37 +101,36 @@ export default function About() {
               ))}
             </div>
           </motion.div>
+        </div>
+      </div>
 
-          {/* 9-pill compression grid */}
-          <div ref={pillRef}>
-            <motion.div
+      {/* Full-width specialty pills — spans both grid columns */}
+      <div className="max-w-content mx-auto px-5 md:px-[52px] mt-12">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-wrap gap-2"
+        >
+          {specialties.map((s, i) => (
+            <motion.span
+              key={s}
+              initial={{ opacity: 0, y: 6 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.35, delay: i * 0.04 }}
+              className="text-[11px] font-light text-warm px-4 py-2.5"
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap,
+                borderRadius: '4px',
+                border: '0.5px solid #c0bbb4',
+                lineHeight: 1.5,
               }}
             >
-              {allPills.map((pill, i) => {
-                const isCenter = centerIndices.has(i)
-                return (
-                  <motion.div
-                    key={pill}
-                    className="text-[11px] font-light text-warm px-4 py-2.5 text-center"
-                    style={{
-                      borderRadius: isCenter ? centerRadius : pillRadius,
-                      border: '0.5px solid',
-                      borderColor: isCenter ? centerBorder : '#c0bbb4',
-                      background: isCenter ? '#f5f1ee' : 'transparent',
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    {pill}
-                  </motion.div>
-                )
-              })}
-            </motion.div>
-          </div>
-        </div>
+              {s}
+            </motion.span>
+          ))}
+        </motion.div>
       </div>
     </section>
   )

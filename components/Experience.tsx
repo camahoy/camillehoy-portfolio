@@ -9,12 +9,15 @@ const jobs = [
     location: 'San Francisco, CA',
     role: 'Senior Research Analyst',
     context:
-      'Global research and strategy consultancy. 50+ programs annually.',
+      'Global research and strategy consultancy. Research manager across 50+ programs annually spanning Fortune 500, federal agencies, and policy institutions.',
     bullets: [
-      'Led end-to-end execution of economic, policy, consumer, and social research for Google, Mastercard, Visa, LSEG, World Bank, U.S. Chamber of Commerce, Pew, AARP, CDC, DHA, and Hilton.',
-      'Built automated output systems and NLP pipelines reducing reporting time from weeks to days across 50+ annual programs.',
-      'Authored LSEG Weekly Consumer Tracker. Produced briefings cited in Reuters, ABC News, and The Washington Post.',
-      'Supported team recruitment, contractor sourcing, and analyst onboarding.',
+      'Served as research manager and lead analyst on end-to-end programs spanning corporate reputation, brand tracking, public affairs, policy trends, consumer behavior, and social research for Google, Pew Research Center, AARP, World Bank, BCBS, Meta, AstraZeneca, Mastercard, CDC, DHA, and the U.S. Chamber of Commerce.',
+      'Managed the full research lifecycle: study design, questionnaire development, methodology selection, agency and vendor management, data collection, analysis, and delivery of executive-ready findings across quantitative and qualitative programs.',
+      'Scoped and executed quick-turn studies to support strategy discussions, surfacing themes across audiences and markets and translating findings into compelling narratives for stakeholders from junior teams to executive leadership.',
+      'Built automated output systems, NLP pipelines, and SOP libraries that reduced reporting time from weeks to days across 50+ annual programs.',
+      'Authored the LSEG Weekly Consumer Tracker and produced research briefings cited in Reuters, ABC News, and The Washington Post.',
+      'Supported panel recruitment, focus group moderation, cognitive testing, and pilot testing across quantitative and qualitative studies.',
+      'Contributed to business development, bid proposals, and IRB and ISO-compliant data workflow documentation.',
     ],
     tags: ['Economic Research', 'Policy Research', 'Python', 'SQL', 'NLP', 'Client Strategy'],
   },
@@ -25,7 +28,7 @@ const jobs = [
     role: 'Business Intelligence and Communications Manager',
     context: 'Digital strategy consultancy for SMB clients.',
     bullets: [
-      'Built consolidated reporting system in Tableau, improving ROI tracking by 30%.',
+      'Built consolidated reporting system in Tableau, improving ROI tracking accuracy by 30 percent.',
       'Translated performance data into acquisition and retention recommendations adopted directly into client growth strategy.',
     ],
     tags: ['Business Intelligence', 'Tableau', 'Analytics'],
@@ -44,13 +47,9 @@ function Role({ job, delay }: { job: (typeof jobs)[0]; delay: number }) {
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.55, delay }}
-      className="grid gap-10 py-10"
-      style={{
-        gridTemplateColumns: '160px 1fr',
-        borderTop: '0.5px solid #ddd8d0',
-      }}
+      className="grid-role"
     >
       <div>
         <p className="text-[12px] font-light text-muted mb-1">{job.period}</p>
@@ -113,11 +112,7 @@ export default function Experience() {
               Education
             </p>
             {edu.map((e) => (
-              <div
-                key={e.inst}
-                className="grid gap-10 mb-4 items-baseline"
-                style={{ gridTemplateColumns: '160px 1fr' }}
-              >
+              <div key={e.inst} className="grid-edu-row">
                 <p className="text-[12px] font-light text-muted">{e.year}</p>
                 <div>
                   <p className="text-[13px] font-medium text-ink">{e.inst}</p>

@@ -53,6 +53,99 @@ body {
   margin: 0;
 }
 
+/* Responsive helper grids (used in components instead of inline style) */
+.grid-hero {
+  display: grid;
+  grid-template-columns: 55% 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.grid-about-inner {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 48px;
+}
+
+.grid-role {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 40px;
+  border-top: 0.5px solid var(--divider);
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.grid-edu-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 40px;
+  margin-bottom: 16px;
+  align-items: baseline;
+}
+
+.grid-tools-card {
+  display: grid;
+  grid-template-columns: 40px 1fr 140px;
+  gap: 32px;
+  align-items: start;
+  border-top: 0.5px solid var(--divider);
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+/* ── Mobile ────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .section-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 20px;
+  }
+
+  .section-grid > :first-child {
+    padding-bottom: 0;
+  }
+
+  /* Tighter section padding on mobile */
+  section.py-20 {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .grid-hero {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .grid-about-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .grid-role {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .grid-edu-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .grid-tools-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .tools-index-col {
+    display: none;
+  }
+
+  .tools-buttons-col {
+    flex-direction: row !important;
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: var(--bg); }

@@ -7,9 +7,10 @@ const tools = [
   {
     idx: '001',
     type: 'Data Visualization',
-    name: 'Cross Star Studio',
-    desc: 'Automated data output system that transforms raw survey tables into clean, executive-ready formats. Removed the manual formatting bottleneck between collection and delivery.',
-    impact: 'Reduced reporting time from weeks to days.',
+    name: 'Cross Stab Studio',
+    need: 'Raw data exports were eating hours of manual formatting before anything useful could be delivered.',
+    desc: 'A workflow tool for reformatting raw survey data and market research exports into clean, executive-ready formats including media releases, updated Excel tables, and client-ready outputs.',
+    impact: 'Reduced reporting time from several weeks to a few days.',
     tags: ['SQL', 'Python', 'Tableau', 'Automation'],
     demoHref: '/demo/cross-star-studio',
   },
@@ -17,8 +18,9 @@ const tools = [
     idx: '002',
     type: 'Operations Infrastructure',
     name: 'Research Ops Organizer',
-    desc: 'Notion-based program management system for concurrent research studies. Single source of truth for milestones, vendors, compliance, and capacity.',
-    impact: '50+ concurrent programs. Zero dropped threads.',
+    need: 'Running 50+ concurrent programs with no single source of truth for milestones, deliverables, or compliance.',
+    desc: 'A Notion-based program management system that tracks concurrent research studies, vendor touchpoints, compliance requirements, and team capacity in one place.',
+    impact: '50+ concurrent programs. Nothing dropped.',
     tags: ['Notion', 'Program Management', 'SOP Design'],
     demoHref: '/demo/research-ops-organizer',
   },
@@ -26,8 +28,9 @@ const tools = [
     idx: '003',
     type: 'AI Knowledge System',
     name: 'Research Brain',
-    desc: 'Living knowledge repository that follows multiple research streams simultaneously. Organizes literature, tags findings by theme, surfaces what matters across projects.',
-    impact: 'Faster study design. Zero repeated insights.',
+    need: 'Institutional knowledge was getting buried between program waves and study design was starting from scratch each time.',
+    desc: 'A living knowledge repository that follows multiple research streams simultaneously. Organizes literature, tags findings by theme, and surfaces relevant prior work so every study starts informed.',
+    impact: 'Faster, better-informed study design across every program.',
     tags: ['AI Tools', 'NLP', 'Literature Review', 'Knowledge Management'],
     demoHref: '/demo/research-brain',
   },
@@ -42,7 +45,8 @@ export default function Tools() {
         </div>
         <div>
           <p className="text-[13px] font-light text-muted italic mb-12">
-            Identified a gap. Built something to close it.
+            Research moves at the speed of the systems behind it. These tools came
+            out of needs I identified on the ground.
           </p>
 
           <div className="space-y-0">
@@ -53,26 +57,28 @@ export default function Tools() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="grid py-10 items-start"
-                style={{
-                  gridTemplateColumns: '40px 1fr 140px',
-                  gap: '32px',
-                  borderTop: '0.5px solid #ddd8d0',
-                }}
+                className="grid-tools-card"
               >
-                {/* Index */}
-                <span className="text-[12px] font-light text-rose-l pt-0.5 tabular-nums">
+                {/* Index — hidden on mobile via CSS */}
+                <span className="tools-index-col text-[12px] font-light text-rose-l pt-0.5 tabular-nums">
                   {tool.idx}
                 </span>
 
                 {/* Content */}
                 <div>
+                  {/* Show index inline on mobile */}
+                  <p className="md:hidden text-[11px] font-light text-rose-l tabular-nums mb-2">
+                    {tool.idx}
+                  </p>
                   <p className="text-[10px] font-light uppercase tracking-[0.18em] text-muted mb-2">
                     {tool.type}
                   </p>
                   <h3 className="text-[18px] font-medium text-ink mb-3 tracking-[-0.01em]">
                     {tool.name}
                   </h3>
+                  <p className="text-[13px] font-light text-muted italic mb-2">
+                    The need: {tool.need}
+                  </p>
                   <p className="text-[13px] font-light text-warm leading-[1.9] mb-3">
                     {tool.desc}
                   </p>
@@ -96,7 +102,7 @@ export default function Tools() {
                 </div>
 
                 {/* Buttons */}
-                <div className="flex flex-col gap-2 pt-0.5">
+                <div className="tools-buttons-col flex flex-col gap-2 pt-0.5">
                   <Link
                     href={tool.demoHref}
                     className="text-[11px] font-light uppercase tracking-[0.1em] text-bg no-underline text-center py-2.5 px-4 transition-opacity hover:opacity-80"

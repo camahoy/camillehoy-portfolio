@@ -7,17 +7,17 @@ const axes = [
   {
     n: '01',
     title: 'Data',
-    desc: 'SQL, Python, NLP pipelines. The infrastructure that makes insight repeatable.',
+    desc: 'Survey design, sampling methodology, quantitative and qualitative execution, A/B testing, MaxDiff, regression analysis, SPSS, SQL, Python, NLP pipelines. Building the infrastructure that makes findings credible, defensible, and repeatable.',
   },
   {
     n: '02',
     title: 'Strategy',
-    desc: 'Translating ambiguous questions into research that informs real decisions.',
+    desc: 'Translating ambiguous business, marketing, and policy questions into well-scoped research. Surfacing themes across markets, identifying nuances, and delivering integrated perspectives that only come from connecting multiple data sources. Communicating findings through compelling narratives tailored to every audience.',
   },
   {
     n: '03',
     title: 'Execution',
-    desc: 'Milestones, vendors, compliance, stakeholder alignment. Landing on time.',
+    desc: 'End-to-end program management across concurrent studies. Agency onboarding, RFP management, milestone planning, vendor coordination, compliance, and stakeholder reporting. Trusted to keep the operating rhythm tight and deliver across multiple priorities simultaneously.',
   },
 ]
 
@@ -32,11 +32,6 @@ const centerIndices = new Set([1, 4, 7])
 export default function About() {
   const sectionRef = useRef(null)
   const pillRef = useRef(null)
-
-  const { scrollYProgress: sectionProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start 0.85', 'center 0.55'],
-  })
 
   const { scrollYProgress: pillProgress } = useScroll({
     target: pillRef,
@@ -57,28 +52,42 @@ export default function About() {
           <p className="label">About</p>
         </div>
         <div>
+          {/* Opening line */}
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
+            className="text-[16px] font-medium text-ink tracking-[-0.01em] mb-8"
+          >
+            Insights do not emerge. They are designed.
+          </motion.p>
+
           {/* Inner two-column: text + axes */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
-            className="grid gap-12 mb-14"
-            style={{ gridTemplateColumns: '1fr 260px' }}
+            className="grid-about-inner mb-14"
           >
             {/* Body text */}
             <div className="space-y-5">
               <p className="text-[14px] font-light text-warm leading-[1.9]">
-                Research and insights strategist at the crossroads of data,
-                strategy, and execution. Four years designing programs that help
-                organizations understand the people they serve and act on what
-                they find.
+                Research and insights strategist with four years building credible,
+                defensible, and actionable research programs across consumer
+                behavior, public opinion, corporate reputation, brand health,
+                policy trends, and social research.
               </p>
               <p className="text-[14px] font-light text-warm leading-[1.9]">
-                What drives the work is genuine curiosity. Not collecting data
-                for its own sake, but finding the insight that shifts something
-                — the outlier that reframes the question, the pattern nobody
-                thought to look for.
+                Rigorous research starts with sound design and ends with a
+                decision. I work across the entire chain, from methodology and
+                data collection through analysis, delivery, and the stakeholder
+                conversations that turn findings into action. I operate as a
+                strategist, not a service: already knowing what the team needs
+                before a request comes in, solving problems rather than answering
+                questions, and making sure my presence in the room is the asset,
+                not just the report.
               </p>
             </div>
 

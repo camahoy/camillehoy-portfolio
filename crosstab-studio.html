@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Crosstab Studio — Camille Hoy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --white:  #ffffff;
+  --bg:     #faf8f5;
+  --bg2:    #f3efe9;
+  --ink:    #1e1916;
+  --warm:   #4a4540;
+  --mid:    #8c8480;
+  --light:  #ddd8d0;
+  --rose:   #a08278;
+  --rose-l: #c9ada7;
+  --rose-x: #f0e6e3;
+  --gold:   #c4a882;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── CURSOR ── */
+* { cursor: none; }
+#cur { width: 8px; height: 8px; background: var(--rose); border-radius: 50%; position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%,-50%); }
+#cur-r { width: 32px; height: 32px; border: 1px solid var(--rose-l); border-radius: 50%; position: fixed; z-index: 9998; pointer-events: none; transform: translate(-50%,-50%); transition: all 0.12s ease-out; opacity: 0.5; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px; padding: 0 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--light);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; color: var(--ink);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--mid); text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--rose); }
+
+/* ── BUTTONS ── */
+.btn {
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  font-weight: 500; text-decoration: none; padding: 13px 28px;
+  border-radius: 2px; transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-rose { background: var(--rose); color: var(--white); }
+.btn-rose:hover { background: var(--warm); transform: translateY(-1px); }
+.btn-outline { border: 1px solid var(--light); color: var(--warm); background: transparent; }
+.btn-outline:hover { border-color: var(--rose); color: var(--rose); }
+
+/* ── SECTIONS ── */
+.s { padding: 112px 0; }
+.s-alt { background: var(--bg); }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 56px; }
+.eyebrow {
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--rose-l); }
+.s-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 3.6vw, 50px);
+  line-height: 1.12; font-weight: 700; color: var(--ink);
+  letter-spacing: -0.02em; margin-bottom: 14px;
+}
+.s-title em { font-style: italic; color: var(--rose); font-weight: 400; }
+.s-lead {
+  font-size: 16px; color: var(--mid); line-height: 1.8;
+  max-width: 560px; font-weight: 300; margin-bottom: 64px;
+}
+
+/* ── FADE UP ── */
+.fu { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fu.on { opacity: 1; transform: translateY(0); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 55% 45%;
+  padding-top: 64px;
+}
+.hero-l {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 56px;
+  background: var(--white);
+}
+.hero-kicker {
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 32px;
+  display: flex; align-items: center; gap: 14px;
+}
+.hero-kicker::before { content: ''; width: 36px; height: 1px; background: var(--rose-l); }
+.hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 5.5vw, 82px);
+  line-height: 1.04; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.025em;
+  margin-bottom: 28px;
+}
+.hero-h1 em { font-style: italic; color: var(--rose); font-weight: 400; }
+.hero-p {
+  font-size: 17px; color: var(--warm); line-height: 1.82;
+  max-width: 420px; font-weight: 300; margin-bottom: 48px;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-r {
+  background: var(--bg); position: relative;
+  display: flex; align-items: center; justify-content: center;
+  border-left: 1px solid var(--light);
+  flex-direction: column; gap: 0;
+}
+.hero-r::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 35%, rgba(192,160,150,0.12) 0%, transparent 65%);
+}
+.hero-mono {
+  font-family: 'Playfair Display', serif;
+  font-size: 140px; font-weight: 700;
+  color: var(--rose-l); opacity: 0.18;
+  line-height: 1; user-select: none; position: relative; z-index: 1;
+  letter-spacing: -0.05em;
+}
+.hero-stats {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  display: grid; grid-template-columns: repeat(3,1fr);
+  border-top: 1px solid var(--light);
+}
+.hero-stat { padding: 22px 20px; background: var(--white); }
+.hero-stat + .hero-stat { border-left: 1px solid var(--light); }
+.stat-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight: 700; color: var(--ink);
+  margin-bottom: 2px;
+}
+.stat-l { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); }
+
+/* ── PROBLEM / BEFORE-AFTER ── */
+.ba-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--light);
+  border-radius: 2px; overflow: hidden;
+  margin-top: 56px;
+}
+.ba-col { background: var(--white); padding: 48px 40px; }
+.ba-col.after { background: var(--bg); }
+.ba-label {
+  font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+  margin-bottom: 24px; padding-bottom: 14px;
+  border-bottom: 2px solid var(--light);
+  display: flex; align-items: center; gap: 10px;
+}
+.ba-label.before-label { color: var(--mid); }
+.ba-label.after-label { color: var(--rose); border-color: var(--rose-l); }
+.ba-item {
+  font-size: 14px; color: var(--warm); margin-bottom: 14px;
+  padding-left: 18px; position: relative; line-height: 1.7; font-weight: 300;
+}
+.ba-item::before {
+  content: ''; position: absolute; left: 0; top: 9px;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--light);
+}
+.ba-col.after .ba-item::before { background: var(--rose-l); }
+.ba-col.after .ba-item { color: var(--ink); font-weight: 400; }
+.ba-time {
+  margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--light);
+  font-size: 13px;
+}
+.ba-time strong {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; display: block; margin-bottom: 2px;
+}
+.ba-time.before-time { color: var(--mid); }
+.ba-time.after-time { color: var(--rose); }
+.ba-time.before-time strong { color: var(--mid); }
+.ba-time.after-time strong { color: var(--rose); }
+
+/* ── HOW IT WORKS ── */
+.steps {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--light);
+  margin-top: 56px; overflow: hidden; border-radius: 2px;
+}
+.step { background: var(--white); padding: 40px 32px; position: relative; }
+.step-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 60px; font-weight: 700;
+  color: var(--rose-x); line-height: 1;
+  margin-bottom: 16px; letter-spacing: -0.03em;
+}
+.step-icon {
+  font-size: 26px; margin-bottom: 16px; display: block;
+  filter: grayscale(0.3);
+}
+.step-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; color: var(--ink); font-weight: 700;
+  margin-bottom: 10px; letter-spacing: -0.01em;
+}
+.step-desc { font-size: 13px; color: var(--mid); line-height: 1.75; font-weight: 300; }
+.step-arrow {
+  position: absolute; right: -14px; top: 50%;
+  transform: translateY(-50%);
+  width: 28px; height: 28px;
+  background: var(--rose-x); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2;
+  font-size: 12px; color: var(--rose);
+}
+.step:last-child .step-arrow { display: none; }
+
+/* ── FEATURE CARDS ── */
+.feat-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--light);
+  margin-top: 56px; overflow: hidden; border-radius: 2px;
+}
+.feat-card {
+  background: var(--bg);
+  padding: 40px 32px;
+  transition: background 0.2s;
+}
+.feat-card:hover { background: var(--rose-x); }
+.feat-icon {
+  font-size: 28px; margin-bottom: 20px; display: block;
+  line-height: 1;
+}
+.feat-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px; color: var(--ink); font-weight: 700;
+  margin-bottom: 10px; letter-spacing: -0.01em;
+}
+.feat-desc { font-size: 13px; color: var(--warm); line-height: 1.78; font-weight: 300; }
+
+/* ── TECH PILLS ── */
+.tech-row {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-top: 48px;
+}
+.tech-pill {
+  font-size: 11px; color: var(--mid); letter-spacing: 0.04em;
+  border: 1px solid var(--light); padding: 8px 18px; border-radius: 2px;
+  background: var(--white);
+  transition: border-color 0.2s, color 0.2s;
+}
+.tech-pill:hover { border-color: var(--rose-l); color: var(--rose); }
+
+/* ── CTA ── */
+.cta-inner {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 28px;
+}
+.cta-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.cta-note {
+  font-size: 12px; color: var(--mid); font-weight: 300;
+}
+
+/* ── BACK LINK ── */
+.back-bar {
+  padding: 20px 56px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--light);
+  display: flex; align-items: center; gap: 10px;
+}
+.back-link {
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--mid); text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--rose); }
+.back-link::before { content: '\2190'; font-size: 14px; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg); border-top: 1px solid var(--light);
+  padding: 28px 56px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.f-name { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--ink); }
+.f-copy { font-size: 11px; color: var(--mid); letter-spacing: 0.05em; }
+
+/* ── DIVIDER ── */
+.divider {
+  width: 40px; height: 1px; background: var(--rose-l);
+  margin: 0 0 32px 0;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 0 24px; } .nav-links { display: none; }
+  #hero { grid-template-columns: 1fr; } .hero-r { display: none; }
+  .hero-l { padding: 60px 24px; }
+  .wrap { padding: 0 24px; } .s { padding: 80px 0; }
+  .back-bar { padding: 16px 24px; }
+  .ba-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .step-arrow { display: none; }
+  .feat-grid { grid-template-columns: 1fr; }
+  footer { padding: 24px; }
+}
+
+@media (max-width: 560px) {
+  .steps { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Camille Hoy</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#tools">Built</a></li>
+    <li><a href="index.html#cited">Cited</a></li>
+    <li><a href="index.html#capabilities">Capabilities</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#connect">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- BACK BAR (below fixed nav) -->
+<div class="back-bar" style="margin-top:64px">
+  <a href="index.html#tools" class="back-link">Back to portfolio</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-l">
+    <p class="hero-kicker">Research Automation Tool</p>
+    <h1 class="hero-h1">Crosstab<br><em>Studio</em></h1>
+    <p class="hero-p">Banner files cleaned, formatted, and export-ready in seconds — not days. Built for analysts who are done losing hours to copy-paste.</p>
+    <div class="hero-actions">
+      <a href="#demo-link" class="btn btn-rose">Launch Demo</a>
+      <a href="https://github.com/camahoy/crosstab-studio" class="btn btn-outline">View on GitHub</a>
+    </div>
+  </div>
+  <div class="hero-r">
+    <div class="hero-mono">CS</div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-n">50+</div>
+        <div class="stat-l">Questions / Program</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-n">5</div>
+        <div class="stat-l">Built-in Profiles</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-n">~0</div>
+        <div class="stat-l">Manual Effort</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem" class="s">
+  <div class="wrap">
+    <div class="fu">
+      <p class="eyebrow">The Problem</p>
+      <h2 class="s-title">A typical banner program<br>used to take <em>days</em></h2>
+      <p class="s-lead">SPSS-generated banner files are functional for data storage. They are brutal to work with for anything else. Every analyst knows the drill.</p>
+    </div>
+
+    <div class="ba-grid fu">
+      <div class="ba-col">
+        <p class="ba-label before-label">Before Crosstab Studio</p>
+        <p class="ba-item">Open the banner file. Find the right sheet. Find the right question.</p>
+        <p class="ba-item">Copy the rows you need. Paste into a blank workbook. Reformat headers.</p>
+        <p class="ba-item">Strip out SPSS formatting artifacts. Apply client brand colors manually.</p>
+        <p class="ba-item">Move net rows to the right position. Re-do for the next question. Repeat 50 times.</p>
+        <p class="ba-item">Rebuild the whole thing if the wave-2 file arrives with a slightly different format.</p>
+        <div class="ba-time before-time">
+          <strong>2–4 days</strong>
+          per program
+        </div>
+      </div>
+      <div class="ba-col after">
+        <p class="ba-label after-label">After Crosstab Studio</p>
+        <p class="ba-item">Upload the banner file. Format is detected automatically.</p>
+        <p class="ba-item">Select questions and columns from a clean UI.</p>
+        <p class="ba-item">Net rows go to the bottom with separators. Base N in headers. TOC auto-generated.</p>
+        <p class="ba-item">Export to formatted Excel or Word. Filename set automatically.</p>
+        <p class="ba-item">Upload W2 and W3 — colour-coded comparison tables generated instantly.</p>
+        <div class="ba-time after-time">
+          <strong>Under 5 minutes</strong>
+          per program
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="s s-alt">
+  <div class="wrap">
+    <div class="fu">
+      <p class="eyebrow">How It Works</p>
+      <h2 class="s-title">Four steps from raw banner<br>to <em>client-ready</em> table</h2>
+    </div>
+
+    <div class="steps fu">
+      <div class="step">
+        <div class="step-n">01</div>
+        <span class="step-icon">&#128196;</span>
+        <p class="step-title">Upload</p>
+        <p class="step-desc">Drop in your SPSS-generated banner Excel file. Multi-wave uploads supported — W1, W2, W3 all at once.</p>
+        <div class="step-arrow">&#8594;</div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <span class="step-icon">&#128269;</span>
+        <p class="step-title">Detect</p>
+        <p class="step-desc">Crosstab Studio matches the file against its profile library. Unknown formats trigger a deep scan of the first 15 sheets.</p>
+        <div class="step-arrow">&#8594;</div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <span class="step-icon">&#9989;</span>
+        <p class="step-title">Select</p>
+        <p class="step-desc">Pick the questions and banner columns you need. Preview row structure with colour-coded formatting before you commit.</p>
+        <div class="step-arrow">&#8594;</div>
+      </div>
+      <div class="step">
+        <div class="step-n">04</div>
+        <span class="step-icon">&#128640;</span>
+        <p class="step-title">Export</p>
+        <p class="step-desc">Clean formatted Excel or Word output. Auto-named <code style="font-size:11px;color:var(--rose);background:var(--rose-x);padding:2px 6px;border-radius:2px;">BannerName_reformatted.xlsx</code>, ready to send.</p>
+        <div class="step-arrow">&#8594;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="s">
+  <div class="wrap">
+    <div class="fu">
+      <p class="eyebrow">Features</p>
+      <h2 class="s-title">Everything the formatting job<br>actually <em>requires</em></h2>
+      <p class="s-lead">No feature bloat. Every capability exists because a real analyst needed it on a real program.</p>
+    </div>
+
+    <div class="feat-grid fu">
+      <div class="feat-card">
+        <span class="feat-icon">&#127919;</span>
+        <p class="feat-title">Auto Format Detection</p>
+        <p class="feat-desc">Matches against five built-in profiles — KP, KP Omni, IData, Corporate Reputation, Global Brand Identity. Unrecognised files get a deep scan that learns and saves the structure as a named profile.</p>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">&#128200;</span>
+        <p class="feat-title">Multi-Wave Comparison</p>
+        <p class="feat-desc">Upload W1, W2, and W3 simultaneously. Crosstab Studio generates colour-coded comparison tables that make wave-over-wave shifts impossible to miss.</p>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">&#128196;</span>
+        <p class="feat-title">Clean Table Structure</p>
+        <p class="feat-desc">Net rows pulled to the bottom with a visual separator. Base N displayed in column headers. Auto-generated table of contents. Exactly how clients expect it.</p>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">&#127775;</span>
+        <p class="feat-title">Format Wizard</p>
+        <p class="feat-desc">Scans the first 15 sheets of any file, shows a colour-coded row preview, and saves the detected structure as a reusable named profile for future uploads.</p>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">&#128195;</span>
+        <p class="feat-title">Dual Export Formats</p>
+        <p class="feat-desc">Export to formatted Excel with preserved structure and styling, or to Word tables ready for a client deck. Output filename is set automatically from the banner name.</p>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">&#9881;</span>
+        <p class="feat-title">Extensible Profile Library</p>
+        <p class="feat-desc">New vendor or proprietary format? Run the deep scan once, name the profile, and every future file from that source is handled automatically. The library grows with the work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="tech" class="s s-alt">
+  <div class="wrap">
+    <div class="fu">
+      <p class="eyebrow">Tech Stack</p>
+      <h2 class="s-title">Straightforward tools,<br><em>well-applied</em></h2>
+      <p class="s-lead">No overengineering. The stack matches the problem — file I/O, tabular data, and a UI that stays out of the way.</p>
+      <div class="tech-row">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">Streamlit</span>
+        <span class="tech-pill">pandas</span>
+        <span class="tech-pill">openpyxl</span>
+        <span class="tech-pill">python-docx</span>
+        <span class="tech-pill">Excel / SPSS Banners</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="s">
+  <div class="wrap">
+    <div class="fu cta-inner">
+      <div>
+        <p class="eyebrow">Try It</p>
+        <h2 class="s-title">See it run on<br>your own <em>banner file</em></h2>
+      </div>
+      <div class="cta-actions">
+        <a href="#demo-link" class="btn btn-rose">Launch Demo</a>
+        <a href="https://github.com/camahoy/crosstab-studio" class="btn btn-outline">View on GitHub</a>
+      </div>
+      <p class="cta-note">Demo accepts any SPSS-style banner Excel file. Nothing is stored.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-name">Camille Hoy</div>
+  <div class="f-copy">&#169; 2025 &nbsp;&middot;&nbsp; <a href="index.html#tools" style="color:var(--mid);text-decoration:none;">Back to portfolio</a></div>
+</footer>
+
+<script>
+// Cursor
+const cur = document.getElementById('cur');
+const curR = document.getElementById('cur-r');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top  = e.clientY + 'px';
+  curR.style.left = e.clientX + 'px';
+  curR.style.top  = e.clientY + 'px';
+});
+
+// Fade-up observer
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

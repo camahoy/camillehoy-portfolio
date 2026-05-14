@@ -9,10 +9,10 @@ export default function ResearchBrainDemo() {
           className="text-ink mb-6 tracking-[-0.02em]"
           style={{ fontSize: '42px', fontWeight: 500, lineHeight: 1.1 }}
         >
-          Research Brain
+          Signal Streams
         </h1>
         <p className="text-[14px] font-light text-warm leading-[1.9] mb-3" style={{ maxWidth: '480px' }}>
-          Living knowledge repository that follows multiple research streams simultaneously. Organizes literature, tags findings by theme, surfaces what matters across projects.
+          Thought leadership engine that ingests research, survey data, literature, and raw data files across multiple topic streams. Auto-digests sources, surfaces patterns, and generates defensible briefs with citations on demand.
         </p>
         <p className="text-[13px] font-light text-muted italic mb-12">
           Demo coming soon.

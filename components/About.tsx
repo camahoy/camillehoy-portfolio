@@ -7,17 +7,17 @@ const axes = [
   {
     n: '01',
     title: 'Data',
-    desc: 'Survey design, sampling methodology, quantitative and qualitative execution, A/B testing, MaxDiff, regression analysis, SPSS, SQL, Python, NLP pipelines. Building the infrastructure that makes findings credible, defensible, and repeatable.',
+    desc: 'Survey design and sampling methodology. Quantitative and qualitative execution. A/B testing, MaxDiff, regression analysis. SPSS, SQL, Python, NLP pipelines. AI-assisted workflows that scale output without compressing rigor.',
   },
   {
     n: '02',
     title: 'Strategy',
-    desc: 'Translating ambiguous business, marketing, and policy questions into well-scoped research. Surfacing themes across markets, identifying nuances, and delivering integrated perspectives that only come from connecting multiple data sources. Communicating findings through compelling narratives tailored to every audience.',
+    desc: 'Translating ambiguous business, marketing, and emerging tech questions into well-scoped research problems. Pressure-testing assumptions before they get baked into design. Surfacing patterns across markets, identifying the exceptions that change the interpretation, and integrating across data sources to develop perspectives that no single study produces alone. Every deliverable is shaped for its audience, from analyst teams to executive leadership.',
   },
   {
     n: '03',
     title: 'Execution',
-    desc: 'End-to-end program management across concurrent studies. Agency onboarding, RFP management, milestone planning, vendor coordination, compliance, and stakeholder reporting. Trusted to keep the operating rhythm tight and deliver across multiple priorities simultaneously.',
+    desc: 'End-to-end ownership across concurrent programs. Briefing design, RFP management, agency onboarding, vendor coordination, milestone planning, compliance, and stakeholder reporting. I lead the operating rhythm across priorities, timelines, and organizations. It\'s how good research actually reaches the people who need it.',
   },
 ]
 
@@ -70,20 +70,25 @@ export default function About() {
             {/* Body text */}
             <div className="space-y-5">
               <p className="text-[14px] font-light text-warm leading-[1.9]">
-                Research and insights strategist with four years building credible,
-                defensible, and actionable research programs across consumer
-                behavior, public opinion, corporate reputation, brand health,
-                policy trends, and social research.
+                Four years at Ipsos Public Affairs managing 50+ annual research
+                programs for Google, Mastercard, Pew Research Center, AARP, CDC,
+                and the World Bank. Consumer behavior, brand health, public
+                opinion, policy, and emerging technology — across markets,
+                methodologies, and datasets ranging from 100K to 500K responses.
               </p>
               <p className="text-[14px] font-light text-warm leading-[1.9]">
-                Rigorous research starts with sound design and ends with a
-                decision. I work across the entire chain, from methodology and
-                data collection through analysis, delivery, and the stakeholder
-                conversations that turn findings into action. I operate as a
-                strategist, not a service: already knowing what the team needs
-                before a request comes in, solving problems rather than answering
-                questions, and making sure my presence in the room is the asset,
-                not just the report.
+                I design the research, run the programs, and deliver the findings.
+                End-to-end, across concurrent studies, for clients who need the
+                work to actually land. NLP and AI pipelines I&apos;ve built have
+                reduced reporting time by 40 to 50 percent on recurring programs.
+                Research I&apos;ve led has been cited in Reuters, ABC News, and
+                The Washington Post.
+              </p>
+              <p className="text-[14px] font-light text-warm leading-[1.9]">
+                The populations I study: consumers, voters, patients, caregivers,
+                early adopters, business owners, policymakers, investors, and
+                frontline workers. The thread across all of it is the same —
+                understanding what people actually believe, and why.
               </p>
             </div>
 

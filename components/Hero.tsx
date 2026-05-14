@@ -3,11 +3,11 @@
 import { motion } from 'framer-motion'
 
 const pills = [
-  '4+ Years · Economic, Policy, Consumer and Social Research',
-  '50+ Annual Programs · Fortune 500, Government, Policy',
-  'Research Management · End-to-End Program Ownership',
+  '4+ Years · Consumer, Economic, Policy and Social Research',
+  '50+ Annual Programs · Fortune 500, Government, Emerging Tech, Policy',
+  'End-to-End Program Ownership · Research Management',
   'Mixed Methods · Quantitative and Qualitative Design',
-  'Insights to Action · Stakeholder Narratives · Executive Communication',
+  'Integrated Insights · Stakeholder Narratives · Executive Communication',
   'Cross-Functional Execution · Vendor and Partner Management',
   'AI-Optimized Workflows · Python · SQL · NLP',
 ]
@@ -42,18 +42,35 @@ export default function Hero() {
             </motion.p>
           </div>
 
-          {/* Right: description */}
-          <motion.p
+          {/* Right: description — editorial treatment */}
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-[13px] font-light text-warm leading-[1.9] pt-2"
+            className="pt-2 space-y-4"
           >
-            Research and insights strategist. Turning curiosity about people
-            (consumers, voters, patients, business owners) and their attitudes,
-            behaviors, and beliefs into research that organizations can actually
-            act on.
-          </motion.p>
+            <p className="text-[15px] font-medium text-ink leading-[1.7] tracking-[-0.01em]">
+              Studying people and building the research infrastructure that turns
+              that understanding into something an organization can act on.
+            </p>
+            <p className="text-[13px] font-light text-warm leading-[1.9]">
+              What drives the work is{' '}
+              <em style={{ color: '#c17f5a', fontStyle: 'normal', fontWeight: 500 }}>belief</em>
+              {' '}— how it forms, what sustains it, what moves it. Not opinion
+              as a data point, but{' '}
+              <span style={{ fontWeight: 400, color: '#4a4540' }}>conviction as something that develops
+              over time, under pressure, inside a life</span>.
+            </p>
+            <p className="text-[13px] font-light text-warm leading-[1.9]">
+              I&apos;m drawn to{' '}
+              <span style={{ fontWeight: 500, color: '#1a1816' }}>questions that don&apos;t fully resolve</span>
+              {' '}— where the data surfaces something that earns the next question,
+              and the next shift in the world makes it worth asking again.
+            </p>
+            <p className="text-[14px] font-medium tracking-[-0.01em]" style={{ color: '#c17f5a' }}>
+              Good research holds until the world shifts. I build for both.
+            </p>
+          </motion.div>
         </div>
 
         {/* 7 pills — 2 cols, 4 rows, last pill centered */}

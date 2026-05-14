@@ -155,38 +155,41 @@ export default function CrossStabStudioDemo() {
             </div>
 
             {/* Streamlit body */}
-            <div style={{ background: '#F7F9FC', padding: '32px 40px', fontFamily: "'Sora', 'Inter', sans-serif" }}>
+            <div style={{ background: '#ffffff', padding: '40px 48px', fontFamily: "'Source Sans Pro', 'Inter', sans-serif" }}>
 
-              {/* Header */}
-              <div style={{ marginBottom: '24px' }}>
-                <h2 style={{ fontSize: '22px', fontWeight: 700, color: '#1a1816', margin: 0, letterSpacing: '-0.01em' }}>
+              {/* Header — matches real app: large title + subtitle inline, dark divider */}
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '20px', marginBottom: '20px' }}>
+                <h2 style={{ fontSize: '28px', fontWeight: 700, color: '#0e1117', margin: 0, letterSpacing: '-0.01em' }}>
                   Crosstab <span style={{ color: '#1976d2' }}>Studio</span>
                 </h2>
-                <p style={{ fontSize: '12px', color: '#6b7280', margin: '4px 0 0', fontFamily: "'DM Mono', monospace" }}>
-                  Research output formatter
-                </p>
+                <span style={{ fontSize: '11px', color: '#9ca3af', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 400 }}>
+                  Research Output Formatter
+                </span>
               </div>
 
-              <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', marginBottom: '24px' }} />
+              <hr style={{ border: 'none', borderTop: '2px solid #0e1117', marginBottom: '28px' }} />
 
               {/* Step 1: Upload */}
-              <StepLabel n="1" title="Upload file" />
+              <StepLabel n="1" title="Upload your file" />
+              <p style={{ fontSize: '13px', color: '#6b7280', marginBottom: '14px', lineHeight: 1.6 }}>
+                Upload one or more files. If comparing waves or subgroups, upload all files here and label each one (e.g. W1, W2, W3 · Gen Pop, Millennials, Boomers · Education, Income, Region).
+              </p>
               {!fileLoaded ? (
-                <div style={{ border: '1.5px dashed #d1d5db', borderRadius: '6px', padding: '32px', textAlign: 'center', background: '#fff', marginBottom: '24px' }}>
-                  <p style={{ fontSize: '13px', color: '#6b7280', marginBottom: '4px' }}>
-                    Drag and drop a .xlsx or .xls banner file here
-                  </p>
-                  <p style={{ fontSize: '11px', color: '#9ca3af', marginBottom: '16px' }}>
-                    Multiple files supported for wave comparison
-                  </p>
-                  <Btn onClick={loadSample}>Load sample file</Btn>
+                <div style={{ background: '#f0f2f6', borderRadius: '6px', padding: '16px 20px', display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '24px' }}>
+                  <button
+                    onClick={loadSample}
+                    style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#fff', border: '1px solid #d1d5db', borderRadius: '6px', padding: '8px 16px', fontSize: '14px', fontWeight: 500, color: '#0e1117', cursor: 'pointer', whiteSpace: 'nowrap' }}
+                  >
+                    <span>↑</span> Upload
+                  </button>
+                  <span style={{ fontSize: '13px', color: '#9ca3af' }}>200MB per file • XLSX, XLS</span>
                 </div>
               ) : (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 14px', background: '#fff', border: '1px solid #e5e7eb', borderRadius: '6px', marginBottom: '24px' }}>
-                  <span style={{ fontSize: '16px' }}>📄</span>
+                <div style={{ background: '#f0f2f6', borderRadius: '6px', padding: '16px 20px', display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
+                  <span style={{ fontSize: '18px' }}>📄</span>
                   <div>
-                    <p style={{ fontSize: '12px', fontWeight: 600, color: '#1a1816', margin: 0 }}>KP_Q1_2024_banner.xlsx</p>
-                    <p style={{ fontSize: '11px', color: '#9ca3af', margin: 0 }}>142 KB · uploaded</p>
+                    <p style={{ fontSize: '13px', fontWeight: 600, color: '#0e1117', margin: 0 }}>KP_Q1_2024_banner.xlsx</p>
+                    <p style={{ fontSize: '12px', color: '#9ca3af', margin: 0 }}>142 KB · ready</p>
                   </div>
                 </div>
               )}
@@ -194,7 +197,7 @@ export default function CrossStabStudioDemo() {
               {/* Step 2: Format detection */}
               {step !== 'upload' && (
                 <>
-                  <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', marginBottom: '24px' }} />
+                  <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '8px 0 24px' }} />
                   <StepLabel n="2" title="Format detection" />
                   <div style={{ border: '1.5px solid #4caf50', borderRadius: '6px', padding: '16px 20px', background: '#fff', marginBottom: '24px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
@@ -245,7 +248,7 @@ export default function CrossStabStudioDemo() {
               {/* Step 3: Scan */}
               {confirmed && step !== 'upload' && (
                 <>
-                  <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', marginBottom: '24px' }} />
+                  <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '8px 0 24px' }} />
                   <StepLabel n="3" title="Scan" />
                   <p style={{ fontSize: '12px', color: '#4b5563', marginBottom: '14px' }}>
                     Format: <strong>Knowledge Panel</strong> · Single file mode
@@ -265,7 +268,7 @@ export default function CrossStabStudioDemo() {
               {/* Step 4: Question & column selection */}
               {(step === 'scanned' || step === 'exported') && (
                 <>
-                  <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', marginBottom: '24px' }} />
+                  <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '8px 0 24px' }} />
                   <StepLabel n="4" title="Select questions and columns" />
 
                   {/* Stats pills */}
@@ -332,7 +335,7 @@ export default function CrossStabStudioDemo() {
               {/* Step 5: Export */}
               {(step === 'scanned' || step === 'exported') && (
                 <>
-                  <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', marginBottom: '24px' }} />
+                  <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '8px 0 24px' }} />
                   <StepLabel n="5" title="Export" />
                   <p style={{ fontSize: '12px', color: '#4b5563', marginBottom: '14px' }}>
                     {selectedQ.length} question{selectedQ.length !== 1 ? 's' : ''} · {selectedCols.length} column{selectedCols.length !== 1 ? 's' : ''} selected
@@ -382,8 +385,8 @@ export default function CrossStabStudioDemo() {
 
 function StepLabel({ n, title }: { n: string; title: string }) {
   return (
-    <p style={{ fontSize: '11px', fontWeight: 600, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>
-      {n} · {title}
+    <p style={{ fontSize: '11px', fontWeight: 700, color: '#1976d2', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '10px' }}>
+      Step {n} — {title}
     </p>
   )
 }

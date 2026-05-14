@@ -6,17 +6,17 @@ const citations = [
   {
     outlet: 'Reuters',
     desc: 'Reuters/Ipsos Issues Survey May 2025',
-    href: 'https://www.ipsos.com/en-us/news-polls/reuters-ipsos-issues-survey-may-2025',
+    href: 'https://www.ipsos.com/en-us/reutersipsos-issues-survey-may-2025',
   },
   {
-    outlet: 'ABC News',
-    desc: 'Public opinion and consumer behavior research',
-    href: '#',
+    outlet: 'ABC News / Washington Post',
+    desc: 'ABC News/Washington Post/Ipsos Poll April 2025',
+    href: 'https://www.ipsos.com/en-us/abc-news-washington-post-ipsos-april-2025',
   },
   {
-    outlet: 'Washington Post',
-    desc: 'U.S. immigration approval and policy sentiment tracking, 2025',
-    href: '#',
+    outlet: 'U.S. Chamber of Commerce',
+    desc: 'Small Business Sentiment Declines — Concerns About Inflation Rise',
+    href: 'https://www.ipsos.com/en-us/small-business-sentiment-declines-concerns-about-inflation-rise',
   },
   {
     outlet: 'LSEG',
@@ -30,7 +30,7 @@ const citations = [
   },
   {
     outlet: 'Client Research',
-    desc: 'Google · Mastercard · Visa · World Bank · Pew · CDC · AARP',
+    desc: 'Google · Mastercard · Visa · World Bank · Pew · CDC · AARP · DHA',
     href: null,
   },
 ]

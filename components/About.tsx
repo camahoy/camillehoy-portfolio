@@ -130,7 +130,7 @@ export default function About() {
                 style={{
                   borderRadius: '4px',
                   border: isCenter ? '1px solid #c17f5a' : '0.5px solid #c0bbb4',
-                  background: isCenter ? '#fdf4ef' : 'transparent',
+                  background: isCenter ? '#e5e0db' : 'transparent',
                   padding: '9px 14px',
                 }}
               >

@@ -13,6 +13,8 @@ const tools = [
     impact: 'Reduced reporting time from several weeks to a few days.',
     tags: ['SQL', 'Python', 'Tableau', 'Automation'],
     demoHref: '/demo/cross-star-studio',
+    githubHref: 'https://github.com/camahoy/crosstab-studio',
+    demoExternal: false,
   },
   {
     idx: '002',
@@ -23,16 +25,20 @@ const tools = [
     impact: '50+ concurrent programs. Nothing dropped.',
     tags: ['Notion', 'Program Management', 'SOP Design'],
     demoHref: '/demo/research-ops-organizer',
+    githubHref: 'https://github.com/camahoy',
+    demoExternal: false,
   },
   {
     idx: '003',
     type: 'AI Knowledge System',
-    name: 'Research Brain',
+    name: 'Signal Streams',
     need: 'Institutional knowledge was getting buried between program waves and study design was starting from scratch each time.',
     desc: 'A living knowledge repository that follows multiple research streams simultaneously. Organizes literature, tags findings by theme, and surfaces relevant prior work so every study starts informed.',
     impact: 'Faster, better-informed study design across every program.',
     tags: ['AI Tools', 'NLP', 'Literature Review', 'Knowledge Management'],
-    demoHref: '/demo/research-brain',
+    demoHref: 'https://research-repo-xi.vercel.app',
+    githubHref: 'https://github.com/camahoy/Research-Repo',
+    demoExternal: true,
   },
 ]
 
@@ -66,7 +72,6 @@ export default function Tools() {
 
                 {/* Content */}
                 <div>
-                  {/* Show index inline on mobile */}
                   <p className="md:hidden text-[11px] font-light text-rose-l tabular-nums mb-2">
                     {tool.idx}
                   </p>
@@ -90,10 +95,7 @@ export default function Tools() {
                       <span
                         key={tag}
                         className="text-[11px] font-light text-muted px-4 py-2"
-                        style={{
-                          borderRadius: '20px',
-                          border: '0.5px solid #c0bbb4',
-                        }}
+                        style={{ borderRadius: '20px', border: '0.5px solid #c0bbb4' }}
                       >
                         {tag}
                       </span>
@@ -103,25 +105,31 @@ export default function Tools() {
 
                 {/* Buttons */}
                 <div className="tools-buttons-col flex flex-col gap-2 pt-0.5">
-                  <Link
-                    href={tool.demoHref}
-                    className="text-[11px] font-light uppercase tracking-[0.1em] text-bg no-underline text-center py-2.5 px-4 transition-opacity hover:opacity-80"
-                    style={{
-                      background: '#1a1816',
-                      borderRadius: '4px',
-                    }}
-                  >
-                    Live Demo
-                  </Link>
+                  {tool.demoExternal ? (
+                    <a
+                      href={tool.demoHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] font-light uppercase tracking-[0.1em] text-bg no-underline text-center py-2.5 px-4 transition-opacity hover:opacity-80"
+                      style={{ background: '#1a1816', borderRadius: '4px' }}
+                    >
+                      Live Demo
+                    </a>
+                  ) : (
+                    <Link
+                      href={tool.demoHref}
+                      className="text-[11px] font-light uppercase tracking-[0.1em] text-bg no-underline text-center py-2.5 px-4 transition-opacity hover:opacity-80"
+                      style={{ background: '#1a1816', borderRadius: '4px' }}
+                    >
+                      Live Demo
+                    </Link>
+                  )}
                   <a
-                    href="https://github.com/camahoy"
+                    href={tool.githubHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[11px] font-light uppercase tracking-[0.1em] text-ink no-underline text-center py-2.5 px-4 transition-colors hover:border-ink"
-                    style={{
-                      border: '0.5px solid #c0bbb4',
-                      borderRadius: '4px',
-                    }}
+                    style={{ border: '0.5px solid #c0bbb4', borderRadius: '4px' }}
                   >
                     GitHub
                   </a>

@@ -24,7 +24,7 @@ const config: Config = {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
-        content: '1080px',
+        content: '1280px',
       },
     },
   },

@@ -40,11 +40,11 @@ body {
 /* Section wrapper — consistent two-column grid */
 .section-grid {
   display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 64px;
-  max-width: 1080px;
+  grid-template-columns: 180px 1fr;
+  gap: 80px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 52px;
+  padding: 0 64px;
 }
 
 /* Section divider */
@@ -57,21 +57,21 @@ body {
 /* Responsive helper grids (used in components instead of inline style) */
 .grid-hero {
   display: grid;
-  grid-template-columns: 55% 1fr;
-  gap: 64px;
+  grid-template-columns: 52% 1fr;
+  gap: 80px;
   align-items: start;
 }
 
 .grid-about-inner {
   display: grid;
-  grid-template-columns: 1fr 260px;
-  gap: 48px;
+  grid-template-columns: 1fr 280px;
+  gap: 56px;
 }
 
 .grid-role {
   display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 40px;
+  grid-template-columns: 180px 1fr;
+  gap: 48px;
   border-top: 0.5px solid var(--divider);
   padding-top: 40px;
   padding-bottom: 40px;
@@ -79,16 +79,16 @@ body {
 
 .grid-edu-row {
   display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 40px;
+  grid-template-columns: 180px 1fr;
+  gap: 48px;
   margin-bottom: 16px;
   align-items: baseline;
 }
 
 .grid-tools-card {
   display: grid;
-  grid-template-columns: 40px 1fr 140px;
-  gap: 32px;
+  grid-template-columns: 40px 1fr 160px;
+  gap: 40px;
   align-items: start;
   border-top: 0.5px solid var(--divider);
   padding-top: 40px;
@@ -100,7 +100,7 @@ body {
   .section-grid {
     grid-template-columns: 1fr;
     gap: 16px;
-    padding: 0 20px;
+    padding: 0 24px;
   }
 
   .section-grid > :first-child {
